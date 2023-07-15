@@ -20,6 +20,9 @@ public class StandardBuilderMaze extends MazeBuilder {
 
     @Override
     public void addDoor(Room r1, Room r2) throws Exception {
+        if (checkIfRoomsHaveADoor(r1, r2)) {
+            throw new Exception("These rooms already have a common door!");
+        }
         this.commonWall(r1, r2);
         Direction firstRoomCommonWallDirection = null;
         for (Direction direction: Direction.values()) {
@@ -60,5 +63,16 @@ public class StandardBuilderMaze extends MazeBuilder {
         }
         throw new IllegalArgumentException("Cannot make door between Room1 (id: " + r1.getRoomNumber() +
                 ") i Room2 (id: " + r2.getRoomNumber() + ")");
+    }
+
+    private boolean checkIfRoomsHaveADoor(Room r1, Room r2) {
+        Direction[] directions = Direction.values();
+        for (Direction direction: directions) {
+            if ((r1.getSide(direction).getClass() == Door.class) &&
+                    (r2.getSide(direction.getOppositeDirection()).getClass() == Door.class)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
