@@ -1,7 +1,6 @@
 package pl.agh.edu.dp.main;
 
 import pl.agh.edu.dp.builders.CountingMazeBuilder;
-import pl.agh.edu.dp.builders.MazeBuilder;
 import pl.agh.edu.dp.builders.StandardBuilderMaze;
 import pl.agh.edu.dp.factories.BombedMazeFactory;
 import pl.agh.edu.dp.factories.MazeFactory;

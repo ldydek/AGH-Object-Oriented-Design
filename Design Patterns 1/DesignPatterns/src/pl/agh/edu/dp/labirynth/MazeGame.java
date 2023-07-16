@@ -1,7 +1,6 @@
 package pl.agh.edu.dp.labirynth;
 
 import pl.agh.edu.dp.builders.MazeBuilder;
-import pl.agh.edu.dp.builders.StandardBuilderMaze;
 import pl.agh.edu.dp.factories.MazeFactory;
 
 public class MazeGame {
