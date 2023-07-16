@@ -17,7 +17,6 @@ public class StandardBuilderMaze extends MazeBuilder {
         room.setSide(Direction.East, new Wall());
         room.setSide(Direction.South, new Wall());
         room.setSide(Direction.West, new Wall());
-        System.out.println("Dodano pokój nr " + room.getRoomNumber());
         this.currentMaze.addRoom(room);
     }
 
@@ -41,8 +40,6 @@ public class StandardBuilderMaze extends MazeBuilder {
             Door door = new Door(r1, r2);
             r1.setSide(firstRoomCommonWallDirection, door);
             r2.setSide(firstRoomCommonWallDirection.getOppositeDirection(), door);
-            System.out.println("Dodano drzwi pomiędzy pokojem " + r1.getRoomNumber() + " a " +
-                    r2.getRoomNumber());
         }
     }
 

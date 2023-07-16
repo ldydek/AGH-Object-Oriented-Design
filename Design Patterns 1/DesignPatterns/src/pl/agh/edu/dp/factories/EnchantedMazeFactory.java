@@ -7,8 +7,18 @@ import pl.agh.edu.dp.products.enchanted.EnchantedDoor;
 import pl.agh.edu.dp.products.enchanted.EnchantedRoom;
 import pl.agh.edu.dp.products.enchanted.EnchantedWall;
 
-public class EnchantedMazeFactory extends MazeFactory {
+public class EnchantedMazeFactory extends AbstractFactory {
 
+    private static EnchantedMazeFactory instance;
+
+    private EnchantedMazeFactory() {}
+
+    public static EnchantedMazeFactory getInstance(){
+        if( instance == null){
+            instance = new EnchantedMazeFactory();
+        }
+        return instance;
+    }
     @Override
     public Room createRoom(int number) {
         return new EnchantedRoom(number);

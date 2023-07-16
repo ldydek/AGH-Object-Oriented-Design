@@ -6,7 +6,18 @@ import pl.agh.edu.dp.labirynth.Wall;
 import pl.agh.edu.dp.products.bombed.BombedRoom;
 import pl.agh.edu.dp.products.bombed.BombedWall;
 
-public class BombedMazeFactory extends MazeFactory {
+public class BombedMazeFactory extends AbstractFactory {
+    private static BombedMazeFactory instance;
+
+    private BombedMazeFactory() {}
+
+    public static BombedMazeFactory getInstance(){
+        if( instance == null){
+            instance = new BombedMazeFactory();
+        }
+        return instance;
+    }
+
     @Override
     public Room createRoom(int number) {
         return new BombedRoom(number);
