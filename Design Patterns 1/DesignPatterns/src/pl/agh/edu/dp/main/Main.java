@@ -1,18 +1,17 @@
 package pl.agh.edu.dp.main;
 
+import pl.agh.edu.dp.builders.StandardBuilderMaze;
+import pl.agh.edu.dp.factories.EnchantedMazeFactory;
+import pl.agh.edu.dp.factories.MazeFactory;
 import pl.agh.edu.dp.labirynth.*;
 
 public class Main {
 
     public static void main(String[] args) throws Exception {
         MazeGame mazeGame = new MazeGame();
+        MazeFactory mazeFactory = new EnchantedMazeFactory();
         StandardBuilderMaze standardBuilderMaze = new StandardBuilderMaze();
-        CountingMazeBuilder countingMazeBuilder = new CountingMazeBuilder();
-
-        mazeGame.createMaze(standardBuilderMaze);
-        System.out.println("Liczba pokojów w labiryncie: " + standardBuilderMaze.getCurrentMaze().getRoomNumbers());
-
-        mazeGame.createMaze(countingMazeBuilder);
-        System.out.println("Liczba elementów w labiryncie: " + countingMazeBuilder.getCounts());
+        mazeGame.createMaze(standardBuilderMaze, mazeFactory);
+        System.out.println(standardBuilderMaze.getCurrentMaze().getRoomNumbers());
     }
 }

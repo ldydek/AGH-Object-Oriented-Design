@@ -5,7 +5,7 @@ import java.util.Vector;
 public class Maze {
     private final Vector<Room> rooms;
 
-    Maze() {
+    public Maze() {
         this.rooms = new Vector<>();
     }
 
