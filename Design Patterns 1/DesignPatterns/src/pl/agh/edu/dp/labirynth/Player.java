@@ -34,10 +34,10 @@ public class Player {
                 this.moveDown();
             }
         }
+        System.out.println("Aktualny numer pokoju: " + this.currentRoom.getRoomNumber());
         if (this.currentRoom.getClass() == BombedRoom.class) {
             throw new Exception();
         }
-        System.out.println(this.currentRoom.getRoomNumber());
     }
 
     public Room getCurrentRoom() {
