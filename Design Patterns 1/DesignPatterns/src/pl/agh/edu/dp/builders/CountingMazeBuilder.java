@@ -7,12 +7,12 @@ public class CountingMazeBuilder extends MazeBuilder {
     private int elementsNumber = 0;
 
     @Override
-    void addRoom(Room room) {
+    public void addRoom(Room room) {
         this.elementsNumber += 5;
     }
 
     @Override
-    void addDoor(Room r1, Room r2) {
+    public void addDoor(Room r1, Room r2) {
         this.commonWall(r1, r2);
     }
 

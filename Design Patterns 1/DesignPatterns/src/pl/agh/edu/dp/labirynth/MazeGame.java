@@ -1,10 +1,11 @@
 package pl.agh.edu.dp.labirynth;
 
+import pl.agh.edu.dp.builders.MazeBuilder;
 import pl.agh.edu.dp.builders.StandardBuilderMaze;
 import pl.agh.edu.dp.factories.MazeFactory;
 
 public class MazeGame {
-    public void createMaze(StandardBuilderMaze mazeBuilder, MazeFactory mazeFactory) throws Exception {
+    public void createMaze(MazeBuilder mazeBuilder, MazeFactory mazeFactory) throws Exception {
         Room r1 = mazeFactory.createRoom(1);
         Room r2 = mazeFactory.createRoom(2);
         Room r3 = mazeFactory.createRoom(3);

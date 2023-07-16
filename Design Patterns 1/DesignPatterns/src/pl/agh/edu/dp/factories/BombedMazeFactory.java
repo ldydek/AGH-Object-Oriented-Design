@@ -5,6 +5,7 @@ import pl.agh.edu.dp.labirynth.Maze;
 import pl.agh.edu.dp.labirynth.Room;
 import pl.agh.edu.dp.labirynth.Wall;
 import pl.agh.edu.dp.products.bombed.BombedRoom;
+import pl.agh.edu.dp.products.bombed.BombedWall;
 
 public class BombedMazeFactory extends MazeFactory {
     @Override
@@ -19,6 +20,6 @@ public class BombedMazeFactory extends MazeFactory {
 
     @Override
     public Wall createWall() {
-        return null;
+        return new BombedWall();
     }
 }
