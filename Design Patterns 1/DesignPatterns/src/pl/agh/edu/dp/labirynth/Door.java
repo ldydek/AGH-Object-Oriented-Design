@@ -11,23 +11,12 @@ public class Door extends MapSite {
 
 
     @Override
-    public void Enter(){
-
-    }
-
-    public Room getRoom1() {
-        return room1;
-    }
-
-    public void setRoom1(Room room1) {
-        this.room1 = room1;
-    }
-
-    public Room getRoom2() {
-        return room2;
-    }
-
-    public void setRoom2(Room room2) {
-        this.room1 = room2;
+    public void Enter(Player player){
+        Room r1 = player.getCurrentRoom();
+        if (this.room1.equals(r1)) {
+            room2.Enter(player);
+        } else {
+            room1.Enter(player);
+        }
     }
 }

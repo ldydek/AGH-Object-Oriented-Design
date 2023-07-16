@@ -4,14 +4,14 @@ import pl.agh.edu.dp.labirynth.Door;
 import pl.agh.edu.dp.labirynth.Room;
 import pl.agh.edu.dp.labirynth.Wall;
 
-public class AbstractMazeFactory extends AbstractFactory {
-    private static AbstractMazeFactory instance;
+public class MazeFactory extends AbstractFactory {
+    private static MazeFactory instance;
 
-    private AbstractMazeFactory() {}
+    private MazeFactory() {}
 
-    public static AbstractMazeFactory getInstance(){
+    public static MazeFactory getInstance(){
         if (instance == null){
-            instance = new AbstractMazeFactory();
+            instance = new MazeFactory();
         }
         return instance;
     }

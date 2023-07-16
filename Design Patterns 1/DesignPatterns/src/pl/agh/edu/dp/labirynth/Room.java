@@ -27,7 +27,7 @@ public class Room extends MapSite
     }
 
     @Override
-    public void Enter(){
-
+    public void Enter(Player player) {
+        player.setCurrentRoom(this);
     }
 }
