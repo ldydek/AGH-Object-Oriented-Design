@@ -12,6 +12,7 @@ public class Main {
         MazeFactory mazeFactory = new EnchantedMazeFactory();
         StandardBuilderMaze standardBuilderMaze = new StandardBuilderMaze();
         mazeGame.createMaze(standardBuilderMaze, mazeFactory);
-        System.out.println(standardBuilderMaze.getCurrentMaze().getRoomNumbers());
+        System.out.println("Liczba pokojów w labiryncie: " +
+                standardBuilderMaze.getCurrentMaze().getRoomNumbers());
     }
 }
