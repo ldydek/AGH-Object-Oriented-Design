@@ -63,5 +63,6 @@ public class Faktura {
 
     private void dodajRabat(IObliczCenePoRabacie iObliczCenePoRabacie) {
         this.suma = iObliczCenePoRabacie.obliczCenePoRabacie(this.suma);
+        System.out.println("KKK");
     }
 }
