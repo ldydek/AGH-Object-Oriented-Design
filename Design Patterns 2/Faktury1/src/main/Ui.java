@@ -15,7 +15,7 @@ public class Ui {
 
 	public static void main(String[] args) {
 		Calendar teraz=Calendar.getInstance();
-		
+		dfafa
 		//Tworzymy towary
 		Towar t1=new Towar(10,"buty");
 		Towar t2=new Towar(2,"skarpety");
