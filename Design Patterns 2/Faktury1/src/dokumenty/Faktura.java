@@ -47,10 +47,6 @@ public class Faktura {
         return this.kontrahent;
     }
 
-    public void wybierzSposobNaliczaniaRabatu(IObliczCenePoRabacie iObliczCenePoRabacie) {
-        this.iObliczCenePoRabacie = iObliczCenePoRabacie;
-    }
-
     public String zwrocTypRabatu() {
         return this.iObliczCenePoRabacie.typRabatu();
     }
