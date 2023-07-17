@@ -10,6 +10,7 @@ import dokumenty.Pozycja;
 
 //ZEWNETRZNY RABAT
 import rabatlosowy.LosowyRabat;
+import rabaty.ObliczCenePoRabacieProcentowym;
 
 
 public class Ui {
@@ -23,6 +24,7 @@ public class Ui {
 
         //I przykladowa fakture
         Faktura f = new Faktura(teraz.getTime(), "Fido");
+        f.wybierzSposobNaliczaniaRabatu(new ObliczCenePoRabacieProcentowym());
         f.dodajPozycje(t1, 3);
         f.dodajPozycje(t2, 5);
 
@@ -44,6 +46,7 @@ public class Ui {
             Pozycja pozycja = iteratorPozycji.next();
             System.out.println("Towar: " + pozycja.getNazwa() + " Ilosc: " + pozycja.getIlosc() + " Wartosc:" + pozycja.getWartosc());
         }
+        System.out.println("Naliczono " + faktura.zwrocTypRabatu() + ".");
         System.out.println("=====================================================");
     }
 
