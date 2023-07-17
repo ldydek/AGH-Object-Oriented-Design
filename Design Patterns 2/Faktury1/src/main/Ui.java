@@ -10,7 +10,6 @@ import dokumenty.Pozycja;
 
 //ZEWNETRZNY RABAT
 import rabatlosowy.LosowyRabat;
-import rabaty.ObliczCenePoRabacieProcentowym;
 
 
 public class Ui {
