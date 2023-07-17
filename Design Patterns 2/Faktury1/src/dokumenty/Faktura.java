@@ -19,7 +19,7 @@ public class Faktura {
     public Faktura(Date dataSprzedazy, String kontrahent) {
         this.dataSprzedazy = dataSprzedazy;
         this.kontrahent = kontrahent;
-        pozycje = new ArrayList<Pozycja>();
+        pozycje = new ArrayList<>();
         suma = 0;
         iObliczCenePoRabacie = Konfiguracja.getInstance().getObliczanieRabatu();
     }
@@ -63,6 +63,5 @@ public class Faktura {
 
     private void dodajRabat(IObliczCenePoRabacie iObliczCenePoRabacie) {
         this.suma = iObliczCenePoRabacie.obliczCenePoRabacie(this.suma);
-        System.out.println("KKK");
     }
 }
