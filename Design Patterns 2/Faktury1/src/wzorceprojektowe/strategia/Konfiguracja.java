@@ -1,4 +1,4 @@
-package rabaty;
+package wzorceprojektowe.strategia;
 
 public class Konfiguracja {
     private static Konfiguracja instance;

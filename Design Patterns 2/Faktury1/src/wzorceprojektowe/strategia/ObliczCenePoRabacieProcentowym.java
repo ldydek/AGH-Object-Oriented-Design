@@ -1,11 +1,13 @@
-package rabaty;
+package wzorceprojektowe.strategia;
+
+import rabatlosowy.LosowyRabat;
 
 public class ObliczCenePoRabacieProcentowym implements IObliczCenePoRabacie {
 
-    private int znizkaWProcentach = 50;
+    private double znizkaWProcentach = new LosowyRabat().losujRabat();
     @Override
     public double obliczCenePoRabacie(double cena) {
-        return cena * znizkaWProcentach / 100;
+        return cena * znizkaWProcentach;
     }
 
     @Override
@@ -13,7 +15,7 @@ public class ObliczCenePoRabacieProcentowym implements IObliczCenePoRabacie {
         return "rabat procentowy";
     }
 
-    public int getZnizkaWProcentach() {
+    public double getZnizkaWProcentach() {
         return znizkaWProcentach;
     }
 }

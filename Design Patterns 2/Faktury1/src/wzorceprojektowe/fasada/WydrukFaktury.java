@@ -1,4 +1,7 @@
-package dokumenty;
+package wzorceprojektowe.fasada;
+
+import dokumenty.Faktura;
+import dokumenty.Pozycja;
 
 import java.util.Iterator;
 
