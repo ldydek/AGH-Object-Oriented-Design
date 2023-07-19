@@ -1,9 +1,10 @@
 package main;
 
 import java.util.Calendar;
-import wzorceprojektowe.fasada.WydrukFaktury;
+import wzorceprojektowe.fasada.WydrukFakturyA;
 import magazyn.Towar;
 import dokumenty.Faktura;
+import wzorceprojektowe.fasada.WydrukFakturyB;
 
 
 public class Ui {
@@ -20,7 +21,12 @@ public class Ui {
         f.dodajPozycje(t1, 3);
         f.dodajPozycje(t2, 5);
 
-        WydrukFaktury wydrukFaktury = new WydrukFaktury();
-        wydrukFaktury.drukujFakture(f);
+        WydrukFakturyA wydrukFakturyA = new WydrukFakturyA();
+        wydrukFakturyA.drukujFakture(f);
+
+        System.out.println();
+
+        WydrukFakturyB wydrukFakturyB = new WydrukFakturyB();
+        wydrukFakturyB.drukujFakture(f);
     }
 }

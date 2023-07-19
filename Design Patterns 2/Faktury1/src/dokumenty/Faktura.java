@@ -51,6 +51,10 @@ public class Faktura {
         return this.iObliczCenePoRabacie.typRabatu();
     }
 
+    public String zwrocWielkoscRabatu() {
+        return this.iObliczCenePoRabacie.wielkoscZnizki();
+    }
+
     private void przeliczSume() {
         Iterator<Pozycja> iteratorPozycji = pozycje.iterator();
         Pozycja pozycja;
