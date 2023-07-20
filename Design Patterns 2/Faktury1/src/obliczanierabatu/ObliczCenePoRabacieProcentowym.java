@@ -1,4 +1,4 @@
-package wzorceprojektowe.strategia;
+package obliczanierabatu;
 
 import rabatlosowy.LosowyRabat;
 

@@ -1,10 +1,10 @@
 package main;
 
 import java.util.Calendar;
-import wzorceprojektowe.fasada.WydrukFakturyA;
+import dokumenty.WydrukFakturyA;
 import magazyn.Towar;
 import dokumenty.Faktura;
-import wzorceprojektowe.fasada.WydrukFakturyB;
+import dokumenty.WydrukFakturyB;
 
 
 public class Ui {

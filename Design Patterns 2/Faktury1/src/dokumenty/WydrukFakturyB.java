@@ -1,7 +1,4 @@
-package wzorceprojektowe.fasada;
-
-import dokumenty.Faktura;
-import wzorceprojektowe.metodaszablonowa.AbstrakcyjnyWydrukFaktury;
+package dokumenty;
 
 public class WydrukFakturyB extends AbstrakcyjnyWydrukFaktury {
     @Override

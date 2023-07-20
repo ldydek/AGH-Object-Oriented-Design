@@ -1,4 +1,4 @@
-package wzorceprojektowe.strategia;
+package obliczanierabatu;
 
 public interface IObliczCenePoRabacie {
     double obliczCenePoRabacie(double cena);

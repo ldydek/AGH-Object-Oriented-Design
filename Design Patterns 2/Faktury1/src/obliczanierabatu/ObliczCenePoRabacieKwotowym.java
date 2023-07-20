@@ -1,4 +1,4 @@
-package wzorceprojektowe.strategia;
+package obliczanierabatu;
 
 public class ObliczCenePoRabacieKwotowym implements IObliczCenePoRabacie {
 

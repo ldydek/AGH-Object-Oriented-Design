@@ -1,4 +1,4 @@
-package wzorceprojektowe.metodaszablonowa;
+package dokumenty;
 
 import dokumenty.Faktura;
 import dokumenty.Pozycja;

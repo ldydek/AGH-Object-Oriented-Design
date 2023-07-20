@@ -5,8 +5,8 @@ import java.util.Iterator;
 import java.util.Date;
 
 import magazyn.Towar;
-import wzorceprojektowe.strategia.IObliczCenePoRabacie;
-import wzorceprojektowe.strategia.Konfiguracja;
+import obliczanierabatu.IObliczCenePoRabacie;
+import obliczanierabatu.Konfiguracja;
 
 
 public class Faktura {
