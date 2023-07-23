@@ -1,6 +1,8 @@
 package magazyn;
 
-public class Towar {
+import kategorie.Komponent;
+
+public class Towar implements Komponent {
     private double cena;
     private String nazwa;
 
@@ -25,5 +27,10 @@ public class Towar {
 
     public void setNazwa(String nazwa) {
         this.nazwa = nazwa;
+    }
+
+    @Override
+    public void wypisz() {
+        System.out.println(this.nazwa);
     }
 }

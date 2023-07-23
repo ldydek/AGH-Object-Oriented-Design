@@ -1,8 +1,5 @@
 package dokumenty;
 
-import dokumenty.Faktura;
-import dokumenty.Pozycja;
-
 import java.util.Iterator;
 
 public abstract class AbstrakcyjnyWydrukFaktury {
