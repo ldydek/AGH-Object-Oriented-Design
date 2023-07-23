@@ -3,6 +3,9 @@ package pl.edu.agh.internetshop;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
@@ -12,28 +15,37 @@ import static pl.edu.agh.internetshop.util.CustomAssertions.assertBigDecimalComp
 
 public class OrderTest {
 
-	private Order getOrderWithMockedProduct() {
+	private Order getOrderWithMockedProducts() {
 		Product product = mock(Product.class);
-		return new Order(product);
+		return new Order(Collections.singletonList(product));
 	}
 
 	@Test
-	public void testGetProductThroughOrder() {
+	public void testGetProductsThroughOrder() {
 		// given
-		Product expectedProduct = mock(Product.class);
-		Order order = new Order(expectedProduct);
+		Product expectedProduct1 = mock(Product.class);
+		Product expectedProduct2 = mock(Product.class);
+		Product expectedProduct3 = mock(Product.class);
+		List<Product> expectedProducts = Arrays.asList(expectedProduct1, expectedProduct2, expectedProduct3);
+		Order order = new Order(expectedProducts);
 
 		// when
-		Product actualProduct = order.getProduct();
+		List<Product> actualProducts = order.getProducts();
 
 		// then
-		assertSame(expectedProduct, actualProduct);
+		assertSame(expectedProducts, actualProducts);
+	}
+
+	@Test
+	public void testProductListNullValue() {
+		// given, when, then
+		assertThrows(NullPointerException.class, () -> new Order(null));
 	}
 
 	@Test
 	public void testSetShipment() throws Exception {
 		// given
-		Order order = getOrderWithMockedProduct();
+		Order order = getOrderWithMockedProducts();
 		Shipment expectedShipment = mock(Shipment.class);
 
 		// when
@@ -46,7 +58,7 @@ public class OrderTest {
 	@Test
 	public void testShipmentWithoutSetting() throws Exception {
 		// given
-		Order order = getOrderWithMockedProduct();
+		Order order = getOrderWithMockedProducts();
 
 		// when
 
@@ -60,7 +72,7 @@ public class OrderTest {
 		BigDecimal expectedProductPrice = BigDecimal.valueOf(1000);
 		Product product = mock(Product.class);
 		given(product.getPrice()).willReturn(expectedProductPrice);
-		Order order = new Order(product);
+		Order order = new Order(Collections.singletonList(product));
 
 		// when
 		BigDecimal actualProductPrice = order.getPrice();
@@ -73,7 +85,7 @@ public class OrderTest {
 		BigDecimal productPrice = BigDecimal.valueOf(productPriceValue);
 		Product product = mock(Product.class);
 		given(product.getPrice()).willReturn(productPrice);
-		return new Order(product);
+		return new Order(Collections.singletonList(product));
 	}
 
 	@Test
@@ -114,7 +126,7 @@ public class OrderTest {
 	@Test
 	public void testSetShipmentMethod() {
 		// given
-		Order order = getOrderWithMockedProduct();
+		Order order = getOrderWithMockedProducts();
 		ShipmentMethod surface = mock(SurfaceMailBus.class);
 
 		// when
@@ -127,7 +139,7 @@ public class OrderTest {
 	@Test
 	public void testSending() {
 		// given
-		Order order = getOrderWithMockedProduct();
+		Order order = getOrderWithMockedProducts();
 		SurfaceMailBus surface = mock(SurfaceMailBus.class);
 		Shipment shipment = mock(Shipment.class);
 		given(shipment.isShipped()).willReturn(true);
@@ -144,7 +156,7 @@ public class OrderTest {
 	@Test
 	public void testIsSentWithoutSending() {
 		// given
-		Order order = getOrderWithMockedProduct();
+		Order order = getOrderWithMockedProducts();
 		Shipment shipment = mock(Shipment.class);
 		given(shipment.isShipped()).willReturn(true);
 
@@ -157,7 +169,7 @@ public class OrderTest {
 	@Test
 	public void testWhetherIdExists() throws Exception {
 		// given
-		Order order = getOrderWithMockedProduct();
+		Order order = getOrderWithMockedProducts();
 
 		// when
 
@@ -168,7 +180,7 @@ public class OrderTest {
 	@Test
 	public void testSetPaymentMethod() throws Exception {
 		// given
-		Order order = getOrderWithMockedProduct();
+		Order order = getOrderWithMockedProducts();
 		PaymentMethod paymentMethod = mock(MoneyTransferPaymentTransaction.class);
 
 		// when
@@ -181,7 +193,7 @@ public class OrderTest {
 	@Test
 	public void testPaying() throws Exception {
 		// given
-		Order order = getOrderWithMockedProduct();
+		Order order = getOrderWithMockedProducts();
 		PaymentMethod paymentMethod = mock(MoneyTransferPaymentTransaction.class);
 		given(paymentMethod.commit(any(MoneyTransfer.class))).willReturn(true);
 		MoneyTransfer moneyTransfer = mock(MoneyTransfer.class);
@@ -198,7 +210,7 @@ public class OrderTest {
 	@Test
 	public void testIsPaidWithoutPaying() throws Exception {
 		// given
-		Order order = getOrderWithMockedProduct();
+		Order order = getOrderWithMockedProducts();
 
 		// when
 

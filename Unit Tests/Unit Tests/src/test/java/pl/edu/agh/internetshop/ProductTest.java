@@ -2,7 +2,7 @@ package pl.edu.agh.internetshop;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static pl.edu.agh.internetshop.util.CustomAssertions.assertBigDecimalCompareValue;
 
 import java.math.BigDecimal;

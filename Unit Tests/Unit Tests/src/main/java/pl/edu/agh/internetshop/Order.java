@@ -1,20 +1,22 @@
 package pl.edu.agh.internetshop;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 
 public class Order {
     private static final BigDecimal TAX_VALUE = BigDecimal.valueOf(1.23);
 	private final UUID id;
-    private final Product product;
+    private final List<Product> products;
     private boolean paid;
     private Shipment shipment;
     private ShipmentMethod shipmentMethod;
     private PaymentMethod paymentMethod;
 
-    public Order(Product product) {
-        this.product = product;
+    public Order(List<Product> products) {
+        this.products = Objects.requireNonNull(products);
         id = UUID.randomUUID();
         paid = false;
     }
@@ -42,15 +44,19 @@ public class Order {
     }
 
     public BigDecimal getPrice() {
-        return product.getPrice();
+        BigDecimal sum = new BigDecimal(0);
+        for (Product product : this.products) {
+            sum = sum.add(product.getPrice());
+        }
+        return sum;
     }
 
     public BigDecimal getPriceWithTaxes() {
         return getPrice().multiply(TAX_VALUE).setScale(Product.PRICE_PRECISION, Product.ROUND_STRATEGY);
     }
 
-    public Product getProduct() {
-        return product;
+    public List<Product> getProducts() {
+        return products;
     }
 
     public ShipmentMethod getShipmentMethod() {
@@ -62,8 +68,8 @@ public class Order {
     }
 
     public void send() {
-        boolean sentSuccesful = getShipmentMethod().send(shipment, shipment.getSenderAddress(), shipment.getRecipientAddress());
-        shipment.setShipped(sentSuccesful);
+        boolean sentSuccessful = getShipmentMethod().send(shipment, shipment.getSenderAddress(), shipment.getRecipientAddress());
+        shipment.setShipped(sentSuccessful);
     }
 
     public void pay(MoneyTransfer moneyTransfer) {
