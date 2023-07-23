@@ -217,4 +217,16 @@ public class OrderTest {
 		// then
 		assertFalse(order.isPaid());
 	}
+
+	@Test
+	public void testOrderDiscount() {
+		// given
+		Order order = getOrderWithMockedProducts();
+		BigDecimal price = order.getPrice();
+
+		// when
+
+		// then
+
+	}
 }
