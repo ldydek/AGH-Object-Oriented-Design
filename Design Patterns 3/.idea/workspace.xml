@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="7a290eea-fc11-4633-b4e5-d6af9920cfe1" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../Unit Tests/Unit Tests/src/main/java/pl/edu/agh/internetshop/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Unit Tests/Unit Tests/src/main/java/pl/edu/agh/internetshop/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Unit Tests/Unit Tests/src/main/java/pl/edu/agh/internetshop/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Unit Tests/Unit Tests/src/main/java/pl/edu/agh/internetshop/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Unit Tests/Unit Tests/src/mock" beforeDir="false" afterPath="$PROJECT_DIR$/../Unit Tests/Unit Tests/src/mock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Unit Tests/Unit Tests/src/test/java/pl/edu/agh/internetshop/ProductTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Unit Tests/Unit Tests/src/test/java/pl/edu/agh/internetshop/ProductTest.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="2Syyu2OP6rjKeEGOJrQryPtbHxw" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/Łukasz/Studia/4. semestr/Projektowanie obiektowe/Design Patterns 3",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7a290eea-fc11-4633-b4e5-d6af9920cfe1" name="Changes" comment="" />
+      <created>1690133334735</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1690133334735</updated>
+      <workItem from="1690133335880" duration="151000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
