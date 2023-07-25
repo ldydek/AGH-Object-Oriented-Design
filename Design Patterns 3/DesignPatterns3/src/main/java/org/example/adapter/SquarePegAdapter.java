@@ -1,4 +1,5 @@
-package adapter;
+package org.example.adapter;
+
 
 public class SquarePegAdapter extends RoundPeg {
     private final SquarePeg squarePeg;
@@ -13,3 +14,4 @@ public class SquarePegAdapter extends RoundPeg {
         return (int) (squarePeg.getWidth() * Math.sqrt(2) / 2);
     }
 }
+

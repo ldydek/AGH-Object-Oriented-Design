@@ -1,4 +1,4 @@
-package adapter;
+package org.example.adapter;
 
 public class RoundPeg {
     private int radius;
@@ -13,3 +13,4 @@ public class RoundPeg {
         return this.radius;
     }
 }
+

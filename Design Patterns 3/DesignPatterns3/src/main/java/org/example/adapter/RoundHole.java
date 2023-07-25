@@ -1,4 +1,4 @@
-package adapter;
+package org.example.adapter;
 
 public class RoundHole {
     private final int radius;
@@ -15,3 +15,4 @@ public class RoundHole {
         return roundPeg.getRadius() <= this.getRadius();
     }
 }
+

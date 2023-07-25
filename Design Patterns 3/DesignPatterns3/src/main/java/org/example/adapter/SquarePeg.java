@@ -1,4 +1,5 @@
-package adapter;
+package org.example.adapter;
+
 
 public class SquarePeg {
     private final int width;
@@ -12,3 +13,4 @@ public class SquarePeg {
     }
 
 }
+
