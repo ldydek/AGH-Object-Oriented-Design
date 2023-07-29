@@ -19,7 +19,7 @@ public class ProductTest {
         //given
     	
         // when
-        Product product = new Product(NAME, PRICE);
+        Product product = new Product(NAME, PRICE, new Discount(new BigDecimal(0.5)));
         
         // then
         assertEquals(NAME, product.getName());
@@ -30,9 +30,58 @@ public class ProductTest {
         //given
     	
         // when
-        Product product = new Product(NAME, PRICE);
-        
+        Product product = new Product(NAME, PRICE, new Discount(new BigDecimal(0.5)));
+
         // then
         assertBigDecimalCompareValue(product.getPrice(), PRICE);
+    }
+
+    @Test
+    public void testProductDiscount() {
+        // given
+        Product product = new Product(NAME, PRICE, new Discount(new BigDecimal(0.5)));
+
+        // when
+        product.applyDiscount();
+        BigDecimal discountedPrice = product.getPrice();
+
+        // then
+        assertBigDecimalCompareValue(BigDecimal.valueOf(0.5), discountedPrice);
+    }
+
+    @Test
+    public void testProductWithFullDiscount() {
+        // given
+        Product product = new Product(NAME, PRICE, new Discount(new BigDecimal(1)));
+
+        // when
+        product.applyDiscount();
+        BigDecimal discountedPrice = product.getPrice();
+
+        // then
+        assertBigDecimalCompareValue(BigDecimal.valueOf(0), discountedPrice);
+    }
+
+    @Test
+    public void testProductWithoutDiscount() {
+        // given
+        Product product = new Product(NAME, PRICE, new Discount(new BigDecimal(0)));
+
+        // when
+        product.applyDiscount();
+        BigDecimal discountedPrice = product.getPrice();
+
+        // then
+        assertBigDecimalCompareValue(PRICE, discountedPrice);
+    }
+
+    @Test
+    public void testPriceWithTooBigDiscount() {
+        assertThrows(IllegalArgumentException.class, () -> new Product(NAME, PRICE, new Discount(new BigDecimal(101))));
+    }
+
+    @Test
+    public void testPriceWithTooSmallDiscount() {
+        assertThrows(IllegalArgumentException.class, () -> new Product(NAME, PRICE, new Discount(new BigDecimal(-1))));
     }
 }
