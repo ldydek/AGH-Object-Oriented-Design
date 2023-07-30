@@ -1,6 +1,7 @@
 package pl.edu.agh.internetshop;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -58,7 +59,7 @@ public class Order {
     }
 
     public List<Product> getProducts() {
-        return products;
+        return new ArrayList<>(products);
     }
 
     public ShipmentMethod getShipmentMethod() {

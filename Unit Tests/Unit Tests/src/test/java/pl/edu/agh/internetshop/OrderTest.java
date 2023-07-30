@@ -40,7 +40,7 @@ public class OrderTest {
         List<Product> actualProducts = order.getProducts();
 
         // then
-        assertSame(expectedProducts, actualProducts);
+        assertEquals(expectedProducts, actualProducts);
     }
 
     @Test

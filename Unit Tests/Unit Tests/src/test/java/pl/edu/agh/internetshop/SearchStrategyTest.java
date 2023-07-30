@@ -14,7 +14,6 @@ public class SearchStrategyTest {
 
     @Test
     public void clientNameSearchStrategyTest() {
-
         // given
         String wantedClientName = "Kowalski";
 
@@ -41,7 +40,6 @@ public class SearchStrategyTest {
 
     @Test
     public void priceSearchStrategyTest() {
-
         // given
         BigDecimal wantedPrice = new BigDecimal(2);
 
@@ -62,7 +60,6 @@ public class SearchStrategyTest {
 
     @Test
     public void productNameSearchStrategyTest() {
-
         // given
         String wantedProductName = "Piłka";
 
@@ -83,7 +80,6 @@ public class SearchStrategyTest {
 
     @Test
     public void compositeSearchStrategyTest() {
-
         // given
         String wantedProductName = "Piłka";
         BigDecimal wantedPrice = new BigDecimal(2);
