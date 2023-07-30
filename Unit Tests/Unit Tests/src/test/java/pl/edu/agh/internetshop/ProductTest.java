@@ -10,27 +10,27 @@ import java.math.BigDecimal;
 
 public class ProductTest {
 
-	
+
     private static final String NAME = "Mr. Sparkle";
     private static final BigDecimal PRICE = BigDecimal.valueOf(1);
 
-	@Test
-    public void testProductName() throws Exception{
+    @Test
+    public void testProductName() throws Exception {
         //given
-    	
+
         // when
-        Product product = new Product(NAME, PRICE, new Discount(new BigDecimal(0.5)));
-        
+        Product product = new Product(NAME, PRICE, new Discount(new BigDecimal("0.5")));
+
         // then
         assertEquals(NAME, product.getName());
     }
-    
+
     @Test
-    public void testProductPrice() throws Exception{
+    public void testProductPrice() throws Exception {
         //given
-    	
+
         // when
-        Product product = new Product(NAME, PRICE, new Discount(new BigDecimal(0.5)));
+        Product product = new Product(NAME, PRICE, new Discount(new BigDecimal("0.5")));
 
         // then
         assertBigDecimalCompareValue(product.getPrice(), PRICE);
@@ -39,7 +39,7 @@ public class ProductTest {
     @Test
     public void testProductDiscount() {
         // given
-        Product product = new Product(NAME, PRICE, new Discount(new BigDecimal(0.5)));
+        Product product = new Product(NAME, PRICE, new Discount(new BigDecimal("0.5")));
 
         // when
         product.applyDiscount();
@@ -76,12 +76,14 @@ public class ProductTest {
     }
 
     @Test
-    public void testPriceWithTooBigDiscount() {
-        assertThrows(IllegalArgumentException.class, () -> new Product(NAME, PRICE, new Discount(new BigDecimal(101))));
+    public void testProductWithTooBigDiscount() {
+        // given, when, then
+        assertThrows(IllegalArgumentException.class, () -> new Product(NAME, PRICE, new Discount(new BigDecimal(2))));
     }
 
     @Test
-    public void testPriceWithTooSmallDiscount() {
+    public void testProductWithTooSmallDiscount() {
+        // given, when, then
         assertThrows(IllegalArgumentException.class, () -> new Product(NAME, PRICE, new Discount(new BigDecimal(-1))));
     }
 }

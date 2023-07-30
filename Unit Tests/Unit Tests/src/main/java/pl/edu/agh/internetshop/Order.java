@@ -14,11 +14,13 @@ public class Order {
     private Shipment shipment;
     private ShipmentMethod shipmentMethod;
     private PaymentMethod paymentMethod;
+    private Discount discount;
 
     public Order(List<Product> products) {
         this.products = Objects.requireNonNull(products);
         id = UUID.randomUUID();
         paid = false;
+        this.discount = new Discount(new BigDecimal(0));
     }
 
     public UUID getId() {
@@ -48,7 +50,7 @@ public class Order {
         for (Product product : this.products) {
             sum = sum.add(product.getPrice());
         }
-        return sum;
+        return this.discount.applyDiscount(sum);
     }
 
     public BigDecimal getPriceWithTaxes() {
@@ -79,5 +81,13 @@ public class Order {
 
     public void setShipment(Shipment shipment) {
         this.shipment = shipment;
+    }
+
+    public void setDiscount(Discount discount) {
+        this.discount = discount;
+    }
+
+    public Discount getDiscount() {
+        return this.discount;
     }
 }

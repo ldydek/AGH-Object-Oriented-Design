@@ -15,218 +15,259 @@ import static pl.edu.agh.internetshop.util.CustomAssertions.assertBigDecimalComp
 
 public class OrderTest {
 
-	private Order getOrderWithMockedProducts() {
-		Product product = mock(Product.class);
-		return new Order(Collections.singletonList(product));
-	}
+    private Order getOrderWithMockedProducts() {
+        Product product = mock(Product.class);
+        return new Order(Collections.singletonList(product));
+    }
 
-	@Test
-	public void testGetProductsThroughOrder() {
-		// given
-		Product expectedProduct1 = mock(Product.class);
-		Product expectedProduct2 = mock(Product.class);
-		Product expectedProduct3 = mock(Product.class);
-		List<Product> expectedProducts = Arrays.asList(expectedProduct1, expectedProduct2, expectedProduct3);
-		Order order = new Order(expectedProducts);
+    private Order getOrderWithCertainProductPrice(double productPriceValue) {
+        BigDecimal productPrice = BigDecimal.valueOf(productPriceValue);
+        Product product = mock(Product.class);
+        given(product.getPrice()).willReturn(productPrice);
+        return new Order(Collections.singletonList(product));
+    }
 
-		// when
-		List<Product> actualProducts = order.getProducts();
+    @Test
+    public void testGetProductsThroughOrder() {
+        // given
+        Product expectedProduct1 = mock(Product.class);
+        Product expectedProduct2 = mock(Product.class);
+        Product expectedProduct3 = mock(Product.class);
+        List<Product> expectedProducts = Arrays.asList(expectedProduct1, expectedProduct2, expectedProduct3);
+        Order order = new Order(expectedProducts);
 
-		// then
-		assertSame(expectedProducts, actualProducts);
-	}
+        // when
+        List<Product> actualProducts = order.getProducts();
 
-	@Test
-	public void testProductListNullValue() {
-		// given, when, then
-		assertThrows(NullPointerException.class, () -> new Order(null));
-	}
+        // then
+        assertSame(expectedProducts, actualProducts);
+    }
 
-	@Test
-	public void testSetShipment() throws Exception {
-		// given
-		Order order = getOrderWithMockedProducts();
-		Shipment expectedShipment = mock(Shipment.class);
+    @Test
+    public void testProductListNullValue() {
+        // given, when, then
+        assertThrows(NullPointerException.class, () -> new Order(null));
+    }
 
-		// when
-		order.setShipment(expectedShipment);
+    @Test
+    public void testSetShipment() throws Exception {
+        // given
+        Order order = getOrderWithMockedProducts();
+        Shipment expectedShipment = mock(Shipment.class);
 
-		// then
-		assertSame(expectedShipment, order.getShipment());
-	}
+        // when
+        order.setShipment(expectedShipment);
 
-	@Test
-	public void testShipmentWithoutSetting() throws Exception {
-		// given
-		Order order = getOrderWithMockedProducts();
+        // then
+        assertSame(expectedShipment, order.getShipment());
+    }
 
-		// when
+    @Test
+    public void testShipmentWithoutSetting() throws Exception {
+        // given
+        Order order = getOrderWithMockedProducts();
 
-		// then
-		assertNull(order.getShipment());
-	}
+        // when
 
-	@Test
-	public void testGetPrice() throws Exception {
-		// given
-		BigDecimal expectedProductPrice = BigDecimal.valueOf(1000);
-		Product product = mock(Product.class);
-		given(product.getPrice()).willReturn(expectedProductPrice);
-		Order order = new Order(Collections.singletonList(product));
+        // then
+        assertNull(order.getShipment());
+    }
 
-		// when
-		BigDecimal actualProductPrice = order.getPrice();
+    @Test
+    public void testGetPrice() throws Exception {
+        // given
+        double expectedProductPrice = 1000;
+        Order order = getOrderWithCertainProductPrice(expectedProductPrice);
 
-		// then
-		assertBigDecimalCompareValue(expectedProductPrice, actualProductPrice);
-	}
+        // when
+        BigDecimal actualProductPrice = order.getPrice();
 
-	private Order getOrderWithCertainProductPrice(double productPriceValue) {
-		BigDecimal productPrice = BigDecimal.valueOf(productPriceValue);
-		Product product = mock(Product.class);
-		given(product.getPrice()).willReturn(productPrice);
-		return new Order(Collections.singletonList(product));
-	}
+        // then
+        assertBigDecimalCompareValue(new BigDecimal(expectedProductPrice), actualProductPrice);
+    }
 
-	@Test
-	public void testPriceWithTaxesWithoutRoundUp() {
-		// given
+    @Test
+    public void testPriceWithTaxesWithoutRoundUp() {
+        // given
 
-		// when
-		Order order = getOrderWithCertainProductPrice(2); // 2 PLN
+        // when
+        Order order = getOrderWithCertainProductPrice(2); // 2 PLN
 
-		// then
-		assertBigDecimalCompareValue(order.getPriceWithTaxes(), BigDecimal.valueOf(2.46)); // 2.46 PLN
-	}
+        // then
+        assertBigDecimalCompareValue(order.getPriceWithTaxes(), BigDecimal.valueOf(2.46)); // 2.46 PLN
+    }
 
-	@Test
-	public void testPriceWithTaxesWithRoundDown() {
-		// given
+    @Test
+    public void testPriceWithTaxesWithRoundDown() {
+        // given
 
-		// when
-		Order order = getOrderWithCertainProductPrice(0.01); // 0.01 PLN
+        // when
+        Order order = getOrderWithCertainProductPrice(0.01); // 0.01 PLN
 
-		// then
-		assertBigDecimalCompareValue(order.getPriceWithTaxes(), BigDecimal.valueOf(0.01)); // 0.01 PLN
-																							
-	}
+        // then
+        assertBigDecimalCompareValue(order.getPriceWithTaxes(), BigDecimal.valueOf(0.01)); // 0.01 PLN
 
-	@Test
-	public void testPriceWithTaxesWithRoundUp() {
-		// given
+    }
 
-		// when
-		Order order = getOrderWithCertainProductPrice(0.03); // 0.03 PLN
+    @Test
+    public void testPriceWithTaxesWithRoundUp() {
+        // given
 
-		// then
-		assertBigDecimalCompareValue(order.getPriceWithTaxes(), BigDecimal.valueOf(0.04)); // 0.04 PLN
-																							
-	}
+        // when
+        Order order = getOrderWithCertainProductPrice(0.03); // 0.03 PLN
 
-	@Test
-	public void testSetShipmentMethod() {
-		// given
-		Order order = getOrderWithMockedProducts();
-		ShipmentMethod surface = mock(SurfaceMailBus.class);
+        // then
+        assertBigDecimalCompareValue(order.getPriceWithTaxes(), BigDecimal.valueOf(0.04)); // 0.04 PLN
 
-		// when
-		order.setShipmentMethod(surface);
+    }
 
-		// then
-		assertSame(surface, order.getShipmentMethod());
-	}
+    @Test
+    public void testSetShipmentMethod() {
+        // given
+        Order order = getOrderWithMockedProducts();
+        ShipmentMethod surface = mock(SurfaceMailBus.class);
 
-	@Test
-	public void testSending() {
-		// given
-		Order order = getOrderWithMockedProducts();
-		SurfaceMailBus surface = mock(SurfaceMailBus.class);
-		Shipment shipment = mock(Shipment.class);
-		given(shipment.isShipped()).willReturn(true);
+        // when
+        order.setShipmentMethod(surface);
 
-		// when
-		order.setShipmentMethod(surface);
-		order.setShipment(shipment);
-		order.send();
+        // then
+        assertSame(surface, order.getShipmentMethod());
+    }
 
-		// then
-		assertTrue(order.isSent());
-	}
+    @Test
+    public void testSending() {
+        // given
+        Order order = getOrderWithMockedProducts();
+        SurfaceMailBus surface = mock(SurfaceMailBus.class);
+        Shipment shipment = mock(Shipment.class);
+        given(shipment.isShipped()).willReturn(true);
 
-	@Test
-	public void testIsSentWithoutSending() {
-		// given
-		Order order = getOrderWithMockedProducts();
-		Shipment shipment = mock(Shipment.class);
-		given(shipment.isShipped()).willReturn(true);
+        // when
+        order.setShipmentMethod(surface);
+        order.setShipment(shipment);
+        order.send();
 
-		// when
+        // then
+        assertTrue(order.isSent());
+    }
 
-		// then
-		assertFalse(order.isSent());
-	}
+    @Test
+    public void testIsSentWithoutSending() {
+        // given
+        Order order = getOrderWithMockedProducts();
+        Shipment shipment = mock(Shipment.class);
+        given(shipment.isShipped()).willReturn(true);
 
-	@Test
-	public void testWhetherIdExists() throws Exception {
-		// given
-		Order order = getOrderWithMockedProducts();
+        // when
 
-		// when
+        // then
+        assertFalse(order.isSent());
+    }
 
-		// then
-		assertNotNull(order.getId());
-	}
+    @Test
+    public void testWhetherIdExists() throws Exception {
+        // given
+        Order order = getOrderWithMockedProducts();
 
-	@Test
-	public void testSetPaymentMethod() throws Exception {
-		// given
-		Order order = getOrderWithMockedProducts();
-		PaymentMethod paymentMethod = mock(MoneyTransferPaymentTransaction.class);
+        // when
 
-		// when
-		order.setPaymentMethod(paymentMethod);
+        // then
+        assertNotNull(order.getId());
+    }
 
-		// then
-		assertSame(paymentMethod, order.getPaymentMethod());
-	}
+    @Test
+    public void testSetPaymentMethod() throws Exception {
+        // given
+        Order order = getOrderWithMockedProducts();
+        PaymentMethod paymentMethod = mock(MoneyTransferPaymentTransaction.class);
 
-	@Test
-	public void testPaying() throws Exception {
-		// given
-		Order order = getOrderWithMockedProducts();
-		PaymentMethod paymentMethod = mock(MoneyTransferPaymentTransaction.class);
-		given(paymentMethod.commit(any(MoneyTransfer.class))).willReturn(true);
-		MoneyTransfer moneyTransfer = mock(MoneyTransfer.class);
-		given(moneyTransfer.isCommitted()).willReturn(true);
+        // when
+        order.setPaymentMethod(paymentMethod);
 
-		// when
-		order.setPaymentMethod(paymentMethod);
-		order.pay(moneyTransfer);
+        // then
+        assertSame(paymentMethod, order.getPaymentMethod());
+    }
 
-		// then
-		assertTrue(order.isPaid());
-	}
+    @Test
+    public void testPaying() throws Exception {
+        // given
+        Order order = getOrderWithMockedProducts();
+        PaymentMethod paymentMethod = mock(MoneyTransferPaymentTransaction.class);
+        given(paymentMethod.commit(any(MoneyTransfer.class))).willReturn(true);
+        MoneyTransfer moneyTransfer = mock(MoneyTransfer.class);
+        given(moneyTransfer.isCommitted()).willReturn(true);
 
-	@Test
-	public void testIsPaidWithoutPaying() throws Exception {
-		// given
-		Order order = getOrderWithMockedProducts();
+        // when
+        order.setPaymentMethod(paymentMethod);
+        order.pay(moneyTransfer);
 
-		// when
+        // then
+        assertTrue(order.isPaid());
+    }
 
-		// then
-		assertFalse(order.isPaid());
-	}
+    @Test
+    public void testIsPaidWithoutPaying() throws Exception {
+        // given
+        Order order = getOrderWithMockedProducts();
 
-	@Test
-	public void testOrderDiscount() {
-		// given
-		Order order = getOrderWithMockedProducts();
-		BigDecimal price = order.getPrice();
+        // when
 
-		// when
+        // then
+        assertFalse(order.isPaid());
+    }
 
-		// then
+    @Test
+    public void testOrderDiscount() {
+        // given
+        double productPriceValue = 100;
+        Order order = getOrderWithCertainProductPrice(productPriceValue);
+        Discount discount = order.getDiscount();
 
-	}
+        // when
+        BigDecimal expectedOrderPrice = order.getPrice();
+
+        // then
+        assertBigDecimalCompareValue(expectedOrderPrice, discount.applyDiscount(new BigDecimal(productPriceValue)));
+    }
+
+    @Test
+    public void testOrderWithFullDiscount() {
+        // given
+        double productPriceValue = 100;
+        Order order = getOrderWithCertainProductPrice(productPriceValue);
+        order.setDiscount(new Discount(new BigDecimal(1)));
+
+        // when
+        BigDecimal expectedOrderPrice = order.getPrice();
+
+        // then
+        assertBigDecimalCompareValue(BigDecimal.valueOf(0), expectedOrderPrice);
+    }
+
+    @Test
+    public void testOrderWithoutDiscount() {
+        // given
+        double productPriceValue = 100;
+        Order order = getOrderWithCertainProductPrice(productPriceValue);
+        order.setDiscount(new Discount(new BigDecimal(0)));
+
+        // when
+        BigDecimal expectedOrderPrice = order.getPrice();
+
+        // then
+        assertBigDecimalCompareValue(BigDecimal.valueOf(100), expectedOrderPrice);
+    }
+
+    @Test
+    public void testSetDiscount() {
+        // given
+        Order order = getOrderWithMockedProducts();
+        Discount expectedDiscount = new Discount(new BigDecimal("0.2"));
+
+        // when
+        order.setDiscount(expectedDiscount);
+
+        // then
+        assertSame(order.getDiscount(), expectedDiscount);
+    }
 }
