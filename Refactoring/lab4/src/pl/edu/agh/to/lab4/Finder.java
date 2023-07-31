@@ -24,7 +24,7 @@ public class Finder {
 
         for (Collection<Prisoner> prisonerCollection : allPrisoners.values()) {
             for (Prisoner prisoner : prisonerCollection) {
-                if (!prisoner.czyMoglbyEwentualnieBycPodejrzany() && prisoner.name.equals(name)) {
+                if (!prisoner.czyMoglbyEwentualnieBycPodejrzany() && prisoner.getName().equals(name)) {
                     suspectedPrisoners.add(prisoner);
                 }
                 if (suspectedPrisoners.size() >= 10) {

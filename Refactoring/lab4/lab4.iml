@@ -14,8 +14,8 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="false" />
     </content>
+    <orderEntry type="jdk" jdkName="17" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="jdk" jdkName="JavaSE-1.6" jdkType="JavaSDK" />
     <orderEntry type="module-library">
       <library name="junit-4.10.jar">
         <CLASSES>
