@@ -5,12 +5,12 @@ import java.util.Collection;
 import java.util.Map;
 
 public class Finder {
-    private final Collection<Person> allPersons;
+    private final Collection<CracowCitizen> allCracowCitizens;
 
     private final Map<String, Collection<Prisoner>> allPrisoners;
 
-    public Finder(Collection<Person> allPersons, Map<String, Collection<Prisoner>> allPrisoners) {
-        this.allPersons = allPersons;
+    public Finder(Collection<CracowCitizen> allCracowCitizens, Map<String, Collection<Prisoner>> allPrisoners) {
+        this.allCracowCitizens = allCracowCitizens;
         this.allPrisoners = allPrisoners;
     }
 
@@ -20,11 +20,11 @@ public class Finder {
 
     public void displayAllSuspectsWithName(String name) {
         ArrayList<Prisoner> suspectedPrisoners = new ArrayList<>();
-        ArrayList<Person> suspectedPersons = new ArrayList<>();
+        ArrayList<CracowCitizen> suspectedCracowCitizens = new ArrayList<>();
 
         for (Collection<Prisoner> prisonerCollection : allPrisoners.values()) {
             for (Prisoner prisoner : prisonerCollection) {
-                if (!prisoner.canBeSuspect() && prisoner.getName().equals(name)) {
+                if (!prisoner.isJailedNow() && prisoner.getName().equals(name)) {
                     suspectedPrisoners.add(prisoner);
                 }
                 if (suspectedPrisoners.size() >= 10) {
@@ -37,24 +37,24 @@ public class Finder {
         }
 
         if (suspectedPrisoners.size() < 10) {
-            for (Person person : allPersons) {
-                if (person.getAge() > 18 && person.getName().equals(name)) {
-                    suspectedPersons.add(person);
+            for (CracowCitizen cracowCitizen : allCracowCitizens) {
+                if (cracowCitizen.getAge() > 18 && cracowCitizen.getName().equals(name)) {
+                    suspectedCracowCitizens.add(cracowCitizen);
                 }
-                if (suspectedPrisoners.size() + suspectedPersons.size() >= 10) {
+                if (suspectedPrisoners.size() + suspectedCracowCitizens.size() >= 10) {
                     break;
                 }
             }
         }
 
-        int t = suspectedPrisoners.size() + suspectedPersons.size();
+        int t = suspectedPrisoners.size() + suspectedCracowCitizens.size();
         System.out.println("Znalazlem " + t + " pasujacych podejrzanych!");
 
         for (Prisoner p : suspectedPrisoners) {
             System.out.println(p.display());
         }
 
-        for (Person p : suspectedPersons) {
+        for (CracowCitizen p : suspectedCracowCitizens) {
             System.out.println(p.display());
         }
     }

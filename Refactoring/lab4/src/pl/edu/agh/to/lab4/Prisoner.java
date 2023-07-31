@@ -25,7 +25,7 @@ public class Prisoner {
         return pesel;
     }
 
-    public boolean canBeSuspect() {
+    public boolean isJailedNow() {
         return judgementYear + sentenceDuration >= getCurrentYear();
     }
 

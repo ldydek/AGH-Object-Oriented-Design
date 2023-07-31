@@ -15,48 +15,48 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class FinderTest {
-    private ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
     private PrintStream originalOut;
 
-    private Collection<Person> allPersons = new ArrayList<Person>();
+    private final Collection<CracowCitizen> allCracowCitizens = new ArrayList<>();
 
-    private Map<String, Collection<Prisoner>> allPrisoners = new HashMap<String, Collection<Prisoner>>();
+    private final Map<String, Collection<Prisoner>> allPrisoners = new HashMap<>();
 
-    private Finder suspectFinder = new Finder(allPersons, allPrisoners);
+    private final Finder suspectFinder = new Finder(allCracowCitizens, allPrisoners);
 
     @Test
     public void testDisplayingNotJailedPrisoner() {
-        addPrisoner("Wiezeienie stanowe", new Prisoner("Jan", "Kowalski", "802104543357", 2000, 1));
+        addPrisoner(new Prisoner("Jan", "Kowalski", "802104543357", 2000, 1));
         suspectFinder.displayAllSuspectsWithName("Jan");
-        assertContentIsDisplayed("Jan Kowalski");
+        assertContentIsDisplayed();
     }
 
     @Test
     public void testDisplayingSuspectedPerson() {
-        allPersons.add(new Person("Jan", "Kowalski", 20));
+        allCracowCitizens.add(new CracowCitizen("Jan", "Kowalski", 20));
         suspectFinder.displayAllSuspectsWithName("Jan");
-        assertContentIsDisplayed("Jan Kowalski");
+        assertContentIsDisplayed();
     }
 
     @Test
     public void testNotDisplayingTooYoungPerson() {
-        allPersons.add(new Person("Jan", "Kowalski", 15));
+        allCracowCitizens.add(new CracowCitizen("Jan", "Kowalski", 15));
         suspectFinder.displayAllSuspectsWithName("Jan");
         assertContentIsNotDisplayed("Jan Kowalski");
     }
 
     @Test
     public void testNotDisplayingJailedPrisoner() {
-        allPersons.add(new Person("Jan", "Kowalski", 20));
-        addPrisoner("Wiezeienie stanowe", new Prisoner("Jan", "Kowalski2", "802104543357", 2000, 20));
+        allCracowCitizens.add(new CracowCitizen("Jan", "Kowalski", 20));
+        addPrisoner(new Prisoner("Jan", "Kowalski2", "802104543357", 2000, 20));
         suspectFinder.displayAllSuspectsWithName("Jan");
         assertContentIsNotDisplayed("Jan Kowalski2");
     }
 
-    private void assertContentIsDisplayed(String expectedContent) {
+    private void assertContentIsDisplayed() {
         assertTrue("Application did not contain expected content: " + outContent.toString(), outContent.toString()
-                .contains(expectedContent));
+                .contains("Jan Kowalski"));
     }
 
     private void assertContentIsNotDisplayed(String expectedContent) {
@@ -75,9 +75,9 @@ public class FinderTest {
         System.setOut(originalOut);
     }
 
-    private void addPrisoner(String category, Prisoner news) {
-        if (!allPrisoners.containsKey(category))
-            allPrisoners.put(category, new ArrayList<Prisoner>());
-        allPrisoners.get(category).add(news);
+    private void addPrisoner(Prisoner news) {
+        if (!allPrisoners.containsKey("Wiezeienie stanowe"))
+            allPrisoners.put("Wiezeienie stanowe", new ArrayList<>());
+        allPrisoners.get("Wiezeienie stanowe").add(news);
     }
 }

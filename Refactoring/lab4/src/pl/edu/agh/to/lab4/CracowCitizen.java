@@ -1,13 +1,13 @@
 package pl.edu.agh.to.lab4;
 
-public class Person {
+public class CracowCitizen {
     private final String name;
 
     private final String surname;
 
     private final int age;
 
-    public Person(String name, String surname, int age) {
+    public CracowCitizen(String name, String surname, int age) {
         this.age = age;
         this.name = name;
         this.surname = surname;
