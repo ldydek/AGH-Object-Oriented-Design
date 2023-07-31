@@ -24,7 +24,7 @@ public class Finder {
 
         for (Collection<Prisoner> prisonerCollection : allPrisoners.values()) {
             for (Prisoner prisoner : prisonerCollection) {
-                if (!prisoner.isJailedNow() && prisoner.getName().equals(name)) {
+                if (isAppropriateSuspect(name, prisoner)) {
                     suspectedPrisoners.add(prisoner);
                 }
                 if (suspectedPrisoners.size() == 10) {
@@ -38,7 +38,7 @@ public class Finder {
 
         if (suspectedPrisoners.size() < 10) {
             for (CracowCitizen cracowCitizen : allCracowCitizens) {
-                if (cracowCitizen.getAge() > 18 && cracowCitizen.getName().equals(name)) {
+                if (isAppropriateSuspect(name, cracowCitizen)) {
                     suspectedCracowCitizens.add(cracowCitizen);
                 }
                 if (suspectedPrisoners.size() + suspectedCracowCitizens.size() == 10) {
@@ -57,5 +57,9 @@ public class Finder {
         for (CracowCitizen cracowCitizen : suspectedCracowCitizens) {
             System.out.println(cracowCitizen.display());
         }
+    }
+
+    private boolean isAppropriateSuspect(String name, Suspect suspect) {
+        return suspect.canBeAccused() && suspect.getName().equals(name);
     }
 }

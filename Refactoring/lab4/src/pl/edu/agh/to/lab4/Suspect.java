@@ -21,4 +21,6 @@ public abstract class Suspect {
     public String display() {
         return name + " " + surname;
     }
+
+    public abstract boolean canBeAccused();
 }

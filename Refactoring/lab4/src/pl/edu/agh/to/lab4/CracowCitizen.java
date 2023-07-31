@@ -12,4 +12,9 @@ public class CracowCitizen extends Suspect {
     public int getAge() {
         return age;
     }
+
+    @Override
+    public boolean canBeAccused() {
+        return this.age >= 18;
+    }
 }

@@ -27,4 +27,9 @@ public class Prisoner extends Suspect {
     public int getCurrentYear() {
         return Calendar.getInstance().get(Calendar.YEAR);
     }
+
+    @Override
+    public boolean canBeAccused() {
+        return !isJailedNow();
+    }
 }
