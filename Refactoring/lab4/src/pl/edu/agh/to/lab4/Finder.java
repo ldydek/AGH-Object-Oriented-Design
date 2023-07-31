@@ -27,11 +27,11 @@ public class Finder {
                 if (!prisoner.isJailedNow() && prisoner.getName().equals(name)) {
                     suspectedPrisoners.add(prisoner);
                 }
-                if (suspectedPrisoners.size() >= 10) {
+                if (suspectedPrisoners.size() == 10) {
                     break;
                 }
             }
-            if (suspectedPrisoners.size() >= 10) {
+            if (suspectedPrisoners.size() == 10) {
                 break;
             }
         }
@@ -41,21 +41,21 @@ public class Finder {
                 if (cracowCitizen.getAge() > 18 && cracowCitizen.getName().equals(name)) {
                     suspectedCracowCitizens.add(cracowCitizen);
                 }
-                if (suspectedPrisoners.size() + suspectedCracowCitizens.size() >= 10) {
+                if (suspectedPrisoners.size() + suspectedCracowCitizens.size() == 10) {
                     break;
                 }
             }
         }
 
-        int t = suspectedPrisoners.size() + suspectedCracowCitizens.size();
-        System.out.println("Znalazlem " + t + " pasujacych podejrzanych!");
+        int numberOfSuspects = suspectedPrisoners.size() + suspectedCracowCitizens.size();
+        System.out.println("Znalazlem " + numberOfSuspects + " pasujacych podejrzanych!");
 
-        for (Prisoner p : suspectedPrisoners) {
-            System.out.println(p.display());
+        for (Prisoner prisoner : suspectedPrisoners) {
+            System.out.println(prisoner.display());
         }
 
-        for (CracowCitizen p : suspectedCracowCitizens) {
-            System.out.println(p.display());
+        for (CracowCitizen cracowCitizen : suspectedCracowCitizens) {
+            System.out.println(cracowCitizen.display());
         }
     }
 }

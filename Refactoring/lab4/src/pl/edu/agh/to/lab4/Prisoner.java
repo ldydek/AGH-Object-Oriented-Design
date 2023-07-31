@@ -2,20 +2,15 @@ package pl.edu.agh.to.lab4;
 
 import java.util.Calendar;
 
-public class Prisoner {
+public class Prisoner extends Suspect {
     private final int judgementYear;
 
     private final int sentenceDuration;
 
     private final String pesel;
 
-    private final String name;
-
-    private final String surname;
-
     public Prisoner(String name, String surname, String pesel, int judgementYear, int sentenceDuration) {
-        this.name = name;
-        this.surname = surname;
+        super(name, surname);
         this.pesel = pesel;
         this.judgementYear = judgementYear;
         this.sentenceDuration = sentenceDuration;
@@ -31,17 +26,5 @@ public class Prisoner {
 
     public int getCurrentYear() {
         return Calendar.getInstance().get(Calendar.YEAR);
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public String display() {
-        return name + " " + surname;
     }
 }
