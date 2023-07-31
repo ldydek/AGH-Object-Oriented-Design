@@ -15,12 +15,12 @@ public class Finder {
     }
 
     public Finder(PersonDataProvider personDataProvider, PrisonersDatabase prisonersDatabase) {
-        this(personDataProvider.getAllCracovCitizens(), prisonersDatabase.findAll());
+        this(personDataProvider.getAllCracowCitizens(), prisonersDatabase.findAll());
     }
 
     public void displayAllSuspectsWithName(String name) {
-        ArrayList<Prisoner> suspectedPrisoners = new ArrayList<Prisoner>();
-        ArrayList<Person> suspectedPersons = new ArrayList<Person>();
+        ArrayList<Prisoner> suspectedPrisoners = new ArrayList<>();
+        ArrayList<Person> suspectedPersons = new ArrayList<>();
 
         for (Collection<Prisoner> prisonerCollection : allPrisoners.values()) {
             for (Prisoner prisoner : prisonerCollection) {
