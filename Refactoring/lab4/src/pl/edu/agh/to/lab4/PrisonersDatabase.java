@@ -32,8 +32,4 @@ public class PrisonersDatabase {
         if (!prisoners.containsKey(category)) prisoners.put(category, new ArrayList<>());
         prisoners.get(category).add(prisoner);
     }
-
-    public static String render(Prisoner prisoner) {
-        return prisoner.getName() + " " + prisoner.getSurname();
-    }
 }

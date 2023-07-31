@@ -1,16 +1,16 @@
 package pl.edu.agh.to.lab4;
 
 public class Person {
-    private String firstname;
+    private final String name;
 
-    private String lastname;
+    private final String surname;
 
-    private int age;
+    private final int age;
 
-    public Person(String firstname, String lastname, int age) {
+    public Person(String name, String surname, int age) {
         this.age = age;
-        this.firstname = firstname;
-        this.lastname = lastname;
+        this.name = name;
+        this.surname = surname;
     }
 
     public int getAge() {
@@ -18,14 +18,14 @@ public class Person {
     }
 
     public String firstname() {
-        return firstname;
+        return name;
     }
 
     public String middlename() {
-        return lastname;
+        return surname;
     }
 
     public String display() {
-        return firstname + " " + lastname;
+        return name + " " + surname;
     }
 }

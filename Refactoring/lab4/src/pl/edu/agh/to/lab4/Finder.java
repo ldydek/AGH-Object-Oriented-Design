@@ -50,8 +50,8 @@ public class Finder {
         int t = suspectedPrisoners.size() + suspectedPersons.size();
         System.out.println("Znalazlem " + t + " pasujacych podejrzanych!");
 
-        for (Prisoner n : suspectedPrisoners) {
-            System.out.println(PrisonersDatabase.render(n));
+        for (Prisoner p : suspectedPrisoners) {
+            System.out.println(p.display());
         }
 
         for (Person p : suspectedPersons) {

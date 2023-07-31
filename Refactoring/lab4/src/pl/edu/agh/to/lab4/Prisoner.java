@@ -40,4 +40,8 @@ public class Prisoner {
     public String getSurname() {
         return surname;
     }
+
+    public String display() {
+        return name + " " + surname;
+    }
 }
