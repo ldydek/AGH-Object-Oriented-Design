@@ -17,11 +17,11 @@ public class Person {
         return age;
     }
 
-    public String firstname() {
+    public String getName() {
         return name;
     }
 
-    public String middlename() {
+    public String getSurname() {
         return surname;
     }
 

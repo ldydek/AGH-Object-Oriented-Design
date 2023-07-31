@@ -24,7 +24,7 @@ public class Finder {
 
         for (Collection<Prisoner> prisonerCollection : allPrisoners.values()) {
             for (Prisoner prisoner : prisonerCollection) {
-                if (!prisoner.czyMoglbyEwentualnieBycPodejrzany() && prisoner.getName().equals(name)) {
+                if (!prisoner.canBeSuspect() && prisoner.getName().equals(name)) {
                     suspectedPrisoners.add(prisoner);
                 }
                 if (suspectedPrisoners.size() >= 10) {
@@ -38,7 +38,7 @@ public class Finder {
 
         if (suspectedPrisoners.size() < 10) {
             for (Person person : allPersons) {
-                if (person.getAge() > 18 && person.firstname().equals(name)) {
+                if (person.getAge() > 18 && person.getName().equals(name)) {
                     suspectedPersons.add(person);
                 }
                 if (suspectedPrisoners.size() + suspectedPersons.size() >= 10) {
