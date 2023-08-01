@@ -14,8 +14,8 @@ public class Finder {
         this.allPrisoners = allPrisoners;
     }
 
-    public Finder(PersonDataProvider personDataProvider, PrisonersDatabase prisonersDatabase) {
-        this(personDataProvider.getAllCracowCitizens(), prisonersDatabase.findAll());
+    public Finder(PeopleDataProvider peopleDataProvider, PrisonersDataProvider prisonersDataProvider) {
+        this(peopleDataProvider.getAllCracowCitizens(), prisonersDataProvider.findAll());
     }
 
     public void displayAllSuspectsWithName(String name) {

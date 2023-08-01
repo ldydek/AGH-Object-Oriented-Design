@@ -5,11 +5,11 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PrisonersDatabase {
+public class PrisonersDataProvider {
 
     private final Map<String, Collection<Prisoner>> prisoners = new HashMap<>();
 
-    public PrisonersDatabase() {
+    public PrisonersDataProvider() {
         addPrisoner("Wiezienie krakowskie", new Prisoner("Jan", "Kowalski", "87080452357", 2005, 7));
         addPrisoner("Wiezienie krakowskie", new Prisoner("Anita", "Wiercipieta", "84080452357", 2009, 3));
         addPrisoner("Wiezienie krakowskie", new Prisoner("Janusz", "Zlowieszczy", "92080445657", 2001, 10));
