@@ -1,15 +1,14 @@
 package pl.edu.agh.to.lab4;
 
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -19,11 +18,11 @@ public class FinderTest {
 
     private PrintStream originalOut;
 
-    private final Collection<CracowCitizen> allCracowCitizens = new ArrayList<>();
+    private final PeopleDataProvider peopleDataProvider = new PeopleDataProvider();
 
-    private final Map<String, Collection<Prisoner>> allPrisoners = new HashMap<>();
+    private final PrisonersDataProvider prisonersDataProvider = new PrisonersDataProvider();
 
-    private final Finder suspectFinder = new Finder(allCracowCitizens, allPrisoners);
+    private final Finder suspectFinder = new Finder(peopleDataProvider, prisonersDataProvider);
 
     @Test
     public void testDisplayingNotJailedPrisoner() {
@@ -34,21 +33,21 @@ public class FinderTest {
 
     @Test
     public void testDisplayingSuspectedPerson() {
-        allCracowCitizens.add(new CracowCitizen("Jan", "Kowalski", 20));
+        peopleDataProvider.getAllCracowCitizens().add(new CracowCitizen("Jan", "Kowalski", 20));
         suspectFinder.displayAllSuspectsWithName("Jan");
         assertContentIsDisplayed();
     }
 
     @Test
     public void testNotDisplayingTooYoungPerson() {
-        allCracowCitizens.add(new CracowCitizen("Jan", "Kowalski", 15));
+        peopleDataProvider.getAllCracowCitizens().add(new CracowCitizen("Jan", "Kowalski", 15));
         suspectFinder.displayAllSuspectsWithName("Jan");
         assertContentIsNotDisplayed("Jan Kowalski");
     }
 
     @Test
     public void testNotDisplayingJailedPrisoner() {
-        allCracowCitizens.add(new CracowCitizen("Jan", "Kowalski", 20));
+        peopleDataProvider.getAllCracowCitizens().add(new CracowCitizen("Jan", "Kowalski", 20));
         addPrisoner(new Prisoner("Jan", "Kowalski2", "802104543357", 2000, 20));
         suspectFinder.displayAllSuspectsWithName("Jan");
         assertContentIsNotDisplayed("Jan Kowalski2");
@@ -76,6 +75,7 @@ public class FinderTest {
     }
 
     private void addPrisoner(Prisoner news) {
+        Map<String, Collection<Prisoner>> allPrisoners = prisonersDataProvider.findAll();
         if (!allPrisoners.containsKey("Wiezeienie stanowe"))
             allPrisoners.put("Wiezeienie stanowe", new ArrayList<>());
         allPrisoners.get("Wiezeienie stanowe").add(news);

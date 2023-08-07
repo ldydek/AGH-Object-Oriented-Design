@@ -27,7 +27,7 @@ public class PeopleDataProvider implements SuspectAggregate {
     }
 
     @Override
-    public Iterator<Suspect> iterator() {
-        return null;
+    public Iterator<? extends Suspect> iterator() {
+        return this.cracowCitizens.iterator();
     }
 }

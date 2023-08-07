@@ -1,6 +1,7 @@
 package pl.edu.agh.to.lab4;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class PrisonersDataProvider implements SuspectAggregate {
 
@@ -31,7 +32,11 @@ public class PrisonersDataProvider implements SuspectAggregate {
     }
 
     @Override
-    public Iterator<Suspect> iterator() {
-        return null;
+    public Iterator<Prisoner> iterator() {
+        Iterator<Prisoner> prisonerIterator = prisoners.values().stream()
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList())
+                .iterator();
+        return new FlatIterator(prisonerIterator);
     }
 }
