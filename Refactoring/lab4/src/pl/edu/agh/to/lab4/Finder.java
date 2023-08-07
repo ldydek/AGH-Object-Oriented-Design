@@ -19,43 +19,38 @@ public class Finder {
     }
 
     public void displayAllSuspectsWithName(String name) {
-        ArrayList<Prisoner> suspectedPrisoners = new ArrayList<>();
-        ArrayList<CracowCitizen> suspectedCracowCitizens = new ArrayList<>();
+        ArrayList<Suspect> suspects = new ArrayList<>();
 
         for (Collection<Prisoner> prisonerCollection : allPrisoners.values()) {
             for (Prisoner prisoner : prisonerCollection) {
                 if (isAppropriateSuspect(name, prisoner)) {
-                    suspectedPrisoners.add(prisoner);
+                    suspects.add(prisoner);
                 }
-                if (suspectedPrisoners.size() == 10) {
+                if (suspects.size() == 10) {
                     break;
                 }
             }
-            if (suspectedPrisoners.size() == 10) {
+            if (suspects.size() == 10) {
                 break;
             }
         }
 
-        if (suspectedPrisoners.size() < 10) {
+        if (suspects.size() < 10) {
             for (CracowCitizen cracowCitizen : allCracowCitizens) {
                 if (isAppropriateSuspect(name, cracowCitizen)) {
-                    suspectedCracowCitizens.add(cracowCitizen);
+                    suspects.add(cracowCitizen);
                 }
-                if (suspectedPrisoners.size() + suspectedCracowCitizens.size() == 10) {
+                if (suspects.size() + suspects.size() == 10) {
                     break;
                 }
             }
         }
 
-        int numberOfSuspects = suspectedPrisoners.size() + suspectedCracowCitizens.size();
+        int numberOfSuspects = suspects.size() + suspects.size();
         System.out.println("Znalazlem " + numberOfSuspects + " pasujacych podejrzanych!");
 
-        for (Prisoner prisoner : suspectedPrisoners) {
-            System.out.println(prisoner.display());
-        }
-
-        for (CracowCitizen cracowCitizen : suspectedCracowCitizens) {
-            System.out.println(cracowCitizen.display());
+        for (Suspect suspect : suspects) {
+            System.out.println(suspect.display());
         }
     }
 

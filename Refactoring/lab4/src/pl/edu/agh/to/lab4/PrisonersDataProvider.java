@@ -1,11 +1,8 @@
 package pl.edu.agh.to.lab4;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
-public class PrisonersDataProvider {
+public class PrisonersDataProvider implements SuspectAggregate {
 
     private final Map<String, Collection<Prisoner>> prisoners = new HashMap<>();
 
@@ -31,5 +28,10 @@ public class PrisonersDataProvider {
     private void addPrisoner(String category, Prisoner prisoner) {
         if (!prisoners.containsKey(category)) prisoners.put(category, new ArrayList<>());
         prisoners.get(category).add(prisoner);
+    }
+
+    @Override
+    public Iterator<Suspect> iterator() {
+        return null;
     }
 }
