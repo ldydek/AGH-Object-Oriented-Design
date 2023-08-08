@@ -8,6 +8,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.assertFalse;
@@ -18,11 +19,21 @@ public class FinderTest {
 
     private PrintStream originalOut;
 
-    private final PeopleDataProvider peopleDataProvider = new PeopleDataProvider();
+    private PeopleDataProvider peopleDataProvider;
 
-    private final PrisonersDataProvider prisonersDataProvider = new PrisonersDataProvider();
+    private PrisonersDataProvider prisonersDataProvider;
 
-    private final Finder suspectFinder = new Finder(peopleDataProvider, prisonersDataProvider);
+    private Finder suspectFinder;
+
+    @Before
+    public void setUp() {
+        peopleDataProvider = new PeopleDataProvider();
+        prisonersDataProvider = new PrisonersDataProvider();
+        List<SuspectAggregate> suspectAggregates = new ArrayList<>();
+        suspectAggregates.add(peopleDataProvider);
+        suspectAggregates.add(prisonersDataProvider);
+        suspectFinder = new Finder(new CompositeAggregate(suspectAggregates));
+    }
 
     @Test
     public void testDisplayingNotJailedPrisoner() {

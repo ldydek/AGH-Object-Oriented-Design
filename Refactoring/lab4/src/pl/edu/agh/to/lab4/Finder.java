@@ -4,27 +4,20 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Finder {
-    private final SuspectAggregate allCracowCitizens;
-    private final SuspectAggregate allPrisoners;
 
-    public Finder(PeopleDataProvider peopleDataProvider, PrisonersDataProvider prisonersDataProvider) {
-        this.allCracowCitizens = peopleDataProvider;
-        this.allPrisoners = prisonersDataProvider;
+    private final CompositeAggregate compositeAggregate;
+
+    public Finder(CompositeAggregate compositeAggregate) {
+        this.compositeAggregate = compositeAggregate;
     }
 
     public void displayAllSuspectsWithName(String name) {
         ArrayList<Suspect> suspects = new ArrayList<>();
 
-        Iterator<? extends Suspect> prisonersIterator = allPrisoners.iterator();
-        Iterator<? extends Suspect> cracowCitizensIterator = allCracowCitizens.iterator();
+        Iterator<? extends Suspect> suspectIterator = compositeAggregate.iterator();
 
-        while (prisonersIterator.hasNext() && suspects.size() < 10) {
-            Suspect suspect = prisonersIterator.next();
-            if (isAppropriateSuspect(name, suspect)) suspects.add(suspect);
-        }
-
-        while (cracowCitizensIterator.hasNext() && suspects.size() < 10) {
-            Suspect suspect = cracowCitizensIterator.next();
+        while (suspectIterator.hasNext() && suspects.size() < 10) {
+            Suspect suspect = suspectIterator.next();
             if (isAppropriateSuspect(name, suspect)) suspects.add(suspect);
         }
 
