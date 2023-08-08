@@ -2,19 +2,7 @@ package pl.edu.agh.to.lab4;
 
 public class CracowCitizen extends Suspect {
 
-    private final int age;
-
     public CracowCitizen(String name, String surname, int age) {
-        super(name, surname);
-        this.age = age;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    @Override
-    public boolean canBeAccused() {
-        return this.age >= 18;
+        super(name, surname, age);
     }
 }

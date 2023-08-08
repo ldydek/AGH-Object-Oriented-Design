@@ -5,9 +5,12 @@ public abstract class Suspect {
     protected final String name;
     protected final String surname;
 
-    public Suspect(String name, String surname) {
+    protected int age;
+
+    public Suspect(String name, String surname, int age) {
         this.name = name;
         this.surname = surname;
+        this.age = age;
     }
 
     public String getName() {
@@ -22,5 +25,11 @@ public abstract class Suspect {
         return name + " " + surname;
     }
 
-    public abstract boolean canBeAccused();
+    public boolean canBeAccused() {
+        return this.age >= 18;
+    }
+
+    public int getAge() {
+        return this.age;
+    }
 }

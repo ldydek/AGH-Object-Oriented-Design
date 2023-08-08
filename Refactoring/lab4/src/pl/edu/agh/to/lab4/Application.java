@@ -9,9 +9,13 @@ public class Application {
 
         suspectAggregates.add(new PrisonersDataProvider());
         suspectAggregates.add(new PeopleDataProvider());
+        suspectAggregates.add(new StudentsDataProvider());
 
         CompositeAggregate allSuspects = new CompositeAggregate(suspectAggregates);
+        CompositeSearchStrategy compositeSearchStrategy = new CompositeSearchStrategy();
+        compositeSearchStrategy.addStrategy(new NameSearchStrategy("Janusz"));
+        compositeSearchStrategy.addStrategy(new AgeSearchStrategy(30));
         Finder suspects = new Finder(allSuspects);
-        suspects.displayAllSuspectsWithName("Janusz");
+        suspects.displayAllSuspects(compositeSearchStrategy);
     }
 }

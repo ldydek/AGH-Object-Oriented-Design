@@ -11,14 +11,14 @@ public class Finder {
         this.compositeAggregate = compositeAggregate;
     }
 
-    public void displayAllSuspectsWithName(String name) {
+    public void displayAllSuspects(SearchStrategy searchStrategy) {
         ArrayList<Suspect> suspects = new ArrayList<>();
 
         Iterator<? extends Suspect> suspectIterator = compositeAggregate.iterator();
 
         while (suspectIterator.hasNext() && suspects.size() < 10) {
             Suspect suspect = suspectIterator.next();
-            if (isAppropriateSuspect(name, suspect)) suspects.add(suspect);
+            if (isAppropriateSuspect(searchStrategy, suspect)) suspects.add(suspect);
         }
 
         int numberOfSuspects = suspects.size();
@@ -27,7 +27,7 @@ public class Finder {
         suspects.forEach(suspect -> System.out.println(suspect.display()));
     }
 
-    private boolean isAppropriateSuspect(String name, Suspect suspect) {
-        return suspect.canBeAccused() && suspect.getName().equals(name);
+    private boolean isAppropriateSuspect(SearchStrategy searchStrategy, Suspect suspect) {
+        return suspect.canBeAccused() && searchStrategy.filter(suspect);
     }
 }

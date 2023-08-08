@@ -25,6 +25,8 @@ public class FinderTest {
 
     private Finder suspectFinder;
 
+    private SearchStrategy searchStrategy;
+
     @Before
     public void setUp() {
         peopleDataProvider = new PeopleDataProvider();
@@ -32,45 +34,46 @@ public class FinderTest {
         List<SuspectAggregate> suspectAggregates = new ArrayList<>();
         suspectAggregates.add(peopleDataProvider);
         suspectAggregates.add(prisonersDataProvider);
+        searchStrategy = new NameSearchStrategy("Janusz");
         suspectFinder = new Finder(new CompositeAggregate(suspectAggregates));
     }
 
     @Test
     public void testDisplayingNotJailedPrisoner() {
-        addPrisoner(new Prisoner("Jan", "Kowalski", "802104543357", 2000, 1));
-        suspectFinder.displayAllSuspectsWithName("Jan");
+        addPrisoner(new Prisoner("Jan", "Kowalski", "802104543357", 2000, 1, 30));
+        suspectFinder.displayAllSuspects(searchStrategy);
         assertContentIsDisplayed();
     }
 
     @Test
     public void testDisplayingSuspectedPerson() {
         peopleDataProvider.getAllCracowCitizens().add(new CracowCitizen("Jan", "Kowalski", 20));
-        suspectFinder.displayAllSuspectsWithName("Jan");
+        suspectFinder.displayAllSuspects(searchStrategy);
         assertContentIsDisplayed();
     }
 
     @Test
     public void testNotDisplayingTooYoungPerson() {
         peopleDataProvider.getAllCracowCitizens().add(new CracowCitizen("Jan", "Kowalski", 15));
-        suspectFinder.displayAllSuspectsWithName("Jan");
+        suspectFinder.displayAllSuspects(searchStrategy);
         assertContentIsNotDisplayed("Jan Kowalski");
     }
 
     @Test
     public void testNotDisplayingJailedPrisoner() {
         peopleDataProvider.getAllCracowCitizens().add(new CracowCitizen("Jan", "Kowalski", 20));
-        addPrisoner(new Prisoner("Jan", "Kowalski2", "802104543357", 2000, 20));
-        suspectFinder.displayAllSuspectsWithName("Jan");
+        addPrisoner(new Prisoner("Jan", "Kowalski2", "802104543357", 2000, 20, 34));
+        suspectFinder.displayAllSuspects(searchStrategy);
         assertContentIsNotDisplayed("Jan Kowalski2");
     }
 
     private void assertContentIsDisplayed() {
-        assertTrue("Application did not contain expected content: " + outContent.toString(), outContent.toString()
+        assertTrue("Application did not contain expected content: " + outContent, outContent.toString()
                 .contains("Jan Kowalski"));
     }
 
     private void assertContentIsNotDisplayed(String expectedContent) {
-        assertFalse("Application did contain expected content although it should not: " + outContent.toString(), outContent.toString()
+        assertFalse("Application did contain expected content although it should not: " + outContent, outContent.toString()
                 .contains(expectedContent));
     }
 

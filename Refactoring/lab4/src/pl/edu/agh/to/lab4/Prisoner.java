@@ -9,8 +9,8 @@ public class Prisoner extends Suspect {
 
     private final String pesel;
 
-    public Prisoner(String name, String surname, String pesel, int judgementYear, int sentenceDuration) {
-        super(name, surname);
+    public Prisoner(String name, String surname, String pesel, int judgementYear, int sentenceDuration, int age) {
+        super(name, surname, age);
         this.pesel = pesel;
         this.judgementYear = judgementYear;
         this.sentenceDuration = sentenceDuration;
