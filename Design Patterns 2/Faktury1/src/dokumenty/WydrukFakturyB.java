@@ -1,6 +1,7 @@
 package dokumenty;
 
 public class WydrukFakturyB extends AbstrakcyjnyWydrukFaktury {
+
     @Override
     protected void drukujNaglowek(Faktura faktura) {
         System.out.println("------------------------------------------------");

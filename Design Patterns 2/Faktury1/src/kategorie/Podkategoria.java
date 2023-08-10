@@ -5,6 +5,7 @@ import magazyn.Towar;
 import java.util.ArrayList;
 
 public class Podkategoria implements Komponent {
+
     private final String nazwa;
     private final ArrayList<Komponent> komponenty;
 
@@ -19,7 +20,7 @@ public class Podkategoria implements Komponent {
 
     @Override
     public void wypisz() {
-        for (Komponent komponent: komponenty) {
+        for (Komponent komponent : komponenty) {
             komponent.wypisz();
         }
     }

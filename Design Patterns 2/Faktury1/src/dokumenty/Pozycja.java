@@ -3,11 +3,12 @@ package dokumenty;
 import magazyn.Towar;
 
 public class Pozycja {
+
     private Towar towar;
     private double cena;
     private double ilosc;
     private double wartosc;
-    private String nazwa;
+    private final String nazwa;
 
     public Pozycja(Towar towar, double ilosc) {
         this.towar = towar;

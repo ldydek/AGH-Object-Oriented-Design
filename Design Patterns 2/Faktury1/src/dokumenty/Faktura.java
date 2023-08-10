@@ -10,6 +10,7 @@ import obliczanierabatu.Konfiguracja;
 
 
 public class Faktura {
+
     Date dataSprzedazy;
     String kontrahent;
     ArrayList<Pozycja> pozycje;

@@ -1,6 +1,7 @@
 package obliczanierabatu;
 
 public class Konfiguracja {
+
     private static Konfiguracja instance;
 
     private Konfiguracja() {}

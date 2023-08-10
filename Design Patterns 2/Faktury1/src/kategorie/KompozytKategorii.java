@@ -46,7 +46,7 @@ public class KompozytKategorii implements Komponent {
 
     @Override
     public void wypisz() {
-        for (Komponent komponent: komponenty) {
+        for (Komponent komponent : komponenty) {
             System.out.println(komponent);
             komponent.wypisz();
             System.out.println();

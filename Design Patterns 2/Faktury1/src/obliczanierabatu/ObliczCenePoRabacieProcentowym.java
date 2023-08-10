@@ -9,6 +9,7 @@ public class ObliczCenePoRabacieProcentowym implements IObliczCenePoRabacie {
     public ObliczCenePoRabacieProcentowym() {
         this.znizkaWProcentach = this.dwaMiejscaPoPrzecinku(this.znizkaWProcentach);
     }
+
     @Override
     public double obliczCenePoRabacie(double cena) {
         return (double) Math.round(cena * (1 - znizkaWProcentach) * 100) / 100;

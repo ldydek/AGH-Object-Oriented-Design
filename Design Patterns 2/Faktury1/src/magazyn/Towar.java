@@ -3,6 +3,7 @@ package magazyn;
 import kategorie.Komponent;
 
 public class Towar implements Komponent {
+
     private double cena;
     private String nazwa;
 

@@ -3,6 +3,7 @@ package kategorie;
 import java.util.ArrayList;
 
 public class Kategoria implements Komponent {
+
     private final String nazwa;
     private final ArrayList<Komponent> komponenty;
 
@@ -17,7 +18,7 @@ public class Kategoria implements Komponent {
 
     @Override
     public void wypisz() {
-        for (Komponent komponent: komponenty) {
+        for (Komponent komponent : komponenty) {
             System.out.println(komponent);
             komponent.wypisz();
         }
