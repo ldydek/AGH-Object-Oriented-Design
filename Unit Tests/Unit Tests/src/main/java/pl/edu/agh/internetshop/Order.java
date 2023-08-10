@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
-
 public class Order {
+
     private static final BigDecimal TAX_VALUE = BigDecimal.valueOf(1.23);
-	private final UUID id;
+    private final UUID id;
     private final List<Product> products;
     private boolean paid;
     private Shipment shipment;

@@ -1,6 +1,7 @@
 package pl.edu.agh.internetshop;
 
 public class Address {
+
     private final String name;
     private final String streetAndHomeNr;
     private final String postalCode;

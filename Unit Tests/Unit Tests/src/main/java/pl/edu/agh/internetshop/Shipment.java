@@ -3,8 +3,8 @@ package pl.edu.agh.internetshop;
 public class Shipment {
 
     private boolean shipped;
-    private Address senderAddress;
-    private Address recipientAddress;
+    private final Address senderAddress;
+    private final Address recipientAddress;
 
     public Shipment(Address senderAddress, Address recipientAddress) {
         this.senderAddress = senderAddress;
@@ -12,7 +12,9 @@ public class Shipment {
         shipped = false;
     }
 
-    public Address getSenderAddress() { return senderAddress; }
+    public Address getSenderAddress() {
+        return senderAddress;
+    }
 
     public Address getRecipientAddress() { return recipientAddress; }
 

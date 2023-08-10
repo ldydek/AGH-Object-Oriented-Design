@@ -1,9 +1,9 @@
 package pl.edu.agh.internetshop;
 
-
 import java.math.BigInteger;
 
 public class MoneyTransfer {
+
     private final BigInteger accountNumber;
     private final String ownerDetails;
     private final String description;

@@ -7,9 +7,7 @@ import static pl.edu.agh.internetshop.util.CustomAssertions.assertBigDecimalComp
 
 import java.math.BigDecimal;
 
-
 public class ProductTest {
-
 
     private static final String NAME = "Mr. Sparkle";
     private static final BigDecimal PRICE = BigDecimal.valueOf(1);

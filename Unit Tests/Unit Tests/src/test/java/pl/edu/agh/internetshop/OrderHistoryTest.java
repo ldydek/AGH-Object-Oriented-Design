@@ -36,7 +36,6 @@ public class OrderHistoryTest {
         List<Product> list1 = new ArrayList<>(Arrays.asList(product1, product1, product2));
         List<Product> list2 = new ArrayList<>(Arrays.asList(product1, product1));
 
-
         order1 = new Order(list1);
         order2 = new Order(list2);
 
