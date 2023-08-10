@@ -1,6 +1,7 @@
 package org.example.adapter;
 
 public class RoundHole {
+
     private final int radius;
 
     public RoundHole(int radius) {

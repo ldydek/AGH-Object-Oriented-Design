@@ -1,7 +1,7 @@
 package org.example.adapter;
 
-
 public class SquarePegAdapter extends RoundPeg {
+
     private final SquarePeg squarePeg;
 
     public SquarePegAdapter(SquarePeg squarePeg) {

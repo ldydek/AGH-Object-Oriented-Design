@@ -1,7 +1,7 @@
 package org.example.adapter;
 
-
 public class SquarePeg {
+
     private final int width;
 
     public SquarePeg(int width) {
