@@ -3,13 +3,14 @@ package pl.agh.edu.dp.labirynth;
 import pl.agh.edu.dp.products.bombed.BombedRoom;
 
 public class Player {
+
     private Room currentRoom;
     private static Player instance;
 
     private Player() {}
 
-    public static Player getInstance(){
-        if (instance == null){
+    public static Player getInstance() {
+        if (instance == null) {
             instance = new Player();
         }
         return instance;
@@ -21,18 +22,10 @@ public class Player {
 
     public void move(char x) throws Exception {
         switch (x) {
-            case 'a' -> {
-                this.moveLeft();
-            }
-            case 'd' -> {
-                this.moveRight();
-            }
-            case 'w' -> {
-                this.moveUp();
-            }
-            case 's' -> {
-                this.moveDown();
-            }
+            case 'a' -> this.moveLeft();
+            case 'd' -> this.moveRight();
+            case 'w' -> this.moveUp();
+            case 's' -> this.moveDown();
         }
         System.out.println("Aktualny numer pokoju: " + this.currentRoom.getRoomNumber());
         if (this.currentRoom.getClass() == BombedRoom.class) {

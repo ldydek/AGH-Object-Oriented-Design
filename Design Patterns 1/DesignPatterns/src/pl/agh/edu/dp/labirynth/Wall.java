@@ -1,11 +1,9 @@
 package pl.agh.edu.dp.labirynth;
 
 public class Wall extends MapSite {
-    public Wall() {
-    }
+
+    public Wall() {}
 
     @Override
-    public void Enter(Player player){
-
-    }
+    public void Enter(Player player) {}
 }

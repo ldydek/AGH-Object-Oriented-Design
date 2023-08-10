@@ -1,6 +1,5 @@
 package pl.agh.edu.dp.builders;
 
-
 import pl.agh.edu.dp.labirynth.*;
 
 public class StandardBuilderMaze extends MazeBuilder {
@@ -27,7 +26,7 @@ public class StandardBuilderMaze extends MazeBuilder {
         }
         this.commonWall(r1, r2);
         Direction firstRoomCommonWallDirection = null;
-        for (Direction direction: Direction.values()) {
+        for (Direction direction : Direction.values()) {
             MapSite r1CommonWallDirection = r1.getSide(direction);
             MapSite r2CommonWallDirection = r2.getSide(direction.getOppositeDirection());
             if (r1CommonWallDirection.equals(r2CommonWallDirection)) {
@@ -69,7 +68,7 @@ public class StandardBuilderMaze extends MazeBuilder {
 
     private boolean checkIfRoomsHaveADoor(Room r1, Room r2) {
         Direction[] directions = Direction.values();
-        for (Direction direction: directions) {
+        for (Direction direction : directions) {
             if ((r1.getSide(direction).getClass() == Door.class) &&
                     (r2.getSide(direction.getOppositeDirection()).getClass() == Door.class)) {
                 return true;

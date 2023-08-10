@@ -37,12 +37,10 @@ public class MazeGame {
     private void createMaze() throws Exception {
         StandardBuilderMaze standardBuilderMaze = new StandardBuilderMaze();
 
-
         AbstractFactory bombedMazeFactory = BombedMazeFactory.getInstance();
         System.out.println(bombedMazeFactory);
         bombedMazeFactory = BombedMazeFactory.getInstance();
         System.out.println(bombedMazeFactory);
-
 
         AbstractFactory mazeFactory = MazeFactory.getInstance();
         Room r1 = mazeFactory.createRoom(1);

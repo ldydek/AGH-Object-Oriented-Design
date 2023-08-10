@@ -13,12 +13,13 @@ public class EnchantedMazeFactory extends AbstractFactory {
 
     private EnchantedMazeFactory() {}
 
-    public static EnchantedMazeFactory getInstance(){
-        if( instance == null){
+    public static EnchantedMazeFactory getInstance() {
+        if (instance == null) {
             instance = new EnchantedMazeFactory();
         }
         return instance;
     }
+
     @Override
     public Room createRoom(int number) {
         return new EnchantedRoom(number);

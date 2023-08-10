@@ -4,17 +4,11 @@ public enum Direction {
     North, South, East, West;
 
     public Direction getOppositeDirection() {
-        switch (this) {
-            case North:
-                return South;
-            case South:
-                return North;
-            case East:
-                return West;
-            case West:
-                return East;
-            default:
-                throw new IllegalArgumentException("Nieprawidłowy kierunek");
-        }
+        return switch (this) {
+            case North -> South;
+            case South -> North;
+            case East -> West;
+            case West -> East;
+        };
     }
 }
