@@ -1,20 +1,19 @@
 package org.example;
 
-import org.example.adapter.RoundHole;
-import org.example.adapter.SquarePeg;
-import org.example.adapter.SquarePegAdapter;
+import org.example.decorator.CompressionDecorator;
+import org.example.decorator.DataSource;
+import org.example.decorator.EncryptionDecorator;
+import org.example.decorator.FileDataSource;
+
+import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) {
-        RoundHole roundHole = new RoundHole(5);
 
-        SquarePeg smallSquarePeg = new SquarePeg(5);
-        SquarePeg largeSquarePeg = new SquarePeg(10);
-
-        SquarePegAdapter smallSquarePegAdapter = new SquarePegAdapter(smallSquarePeg);
-        SquarePegAdapter largeSquarePegAdapter = new SquarePegAdapter(largeSquarePeg);
-
-        System.out.println(roundHole.fits(smallSquarePegAdapter));
-        System.out.println(roundHole.fits(largeSquarePegAdapter));
+    public static void main(String[] args) throws IOException {
+        String stringToCompressAndEncrypt = "nypel";
+        String filePath = "./src/main/java/org/example/decorator/data.txt";
+        DataSource dataSource = new CompressionDecorator(new EncryptionDecorator(new FileDataSource(filePath)));
+        dataSource.writeData(stringToCompressAndEncrypt);
+        dataSource.readData();
     }
 }
