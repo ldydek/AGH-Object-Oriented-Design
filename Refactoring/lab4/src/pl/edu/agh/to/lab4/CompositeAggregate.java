@@ -16,7 +16,7 @@ public class CompositeAggregate implements SuspectAggregate {
     @Override
     public Iterator<? extends Suspect> iterator() {
         Collection<Suspect> suspects = new ArrayList<>();
-        for (SuspectAggregate suspectAggregate: suspectAggregates) {
+        for (SuspectAggregate suspectAggregate : suspectAggregates) {
             Iterator<? extends Suspect> suspectIterator = suspectAggregate.iterator();
             while (suspectIterator.hasNext()) suspects.add(suspectIterator.next());
         }

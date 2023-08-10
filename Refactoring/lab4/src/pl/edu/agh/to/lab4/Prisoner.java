@@ -3,6 +3,7 @@ package pl.edu.agh.to.lab4;
 import java.util.Calendar;
 
 public class Prisoner extends Suspect {
+
     private final int judgementYear;
 
     private final int sentenceDuration;

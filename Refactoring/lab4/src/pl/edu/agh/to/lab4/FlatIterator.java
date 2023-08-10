@@ -3,6 +3,7 @@ package pl.edu.agh.to.lab4;
 import java.util.Iterator;
 
 public class FlatIterator implements Iterator<Prisoner> {
+
     private final Iterator<Prisoner> prisonerIterator;
 
     public FlatIterator(Iterator<Prisoner> prisonerIterator) {
