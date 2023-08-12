@@ -10,7 +10,8 @@ public class CopyCommand extends Command {
     }
 
     @Override
-    public void execute() {
+    public boolean execute() {
         app.clipboard = editor.getSelection();
+        return false;
     }
 }

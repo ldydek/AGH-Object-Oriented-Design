@@ -22,5 +22,5 @@ public abstract class Command {
         this.editor.getJTextArea().setText(backup);
     }
 
-    public abstract void execute();
+    public abstract boolean execute();
 }

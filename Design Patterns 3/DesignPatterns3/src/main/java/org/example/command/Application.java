@@ -44,18 +44,16 @@ public class Application {
         frame.setVisible(true);
     }
 
-    private void executeCommand(Command command) {
-        command.execute();
-        history.push(command);
-    }
-
     public void undo() {
         if (history.isEmpty()) return;
 
         Command command = history.pop();
-        System.out.println(command);
         if (command != null) {
             command.undo();
         }
+    }
+
+    private void executeCommand(Command command) {
+        if (command.execute()) history.push(command);
     }
 }

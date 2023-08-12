@@ -15,8 +15,7 @@ public class Editor {
     }
 
     public void replaceSelection(String text) {
-        this.jTextArea.append("\n");
-        this.jTextArea.append(text);
+        this.jTextArea.setText(text);
     }
 
     public JTextArea getJTextArea() {
