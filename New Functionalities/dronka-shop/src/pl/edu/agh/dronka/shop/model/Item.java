@@ -2,70 +2,65 @@ package pl.edu.agh.dronka.shop.model;
 
 public class Item {
 
-	private String name;
+    private String name;
+    private Category category;
+    private int price;
+    private int quantity;
+    private boolean secondhand;
+    private boolean polish;
 
-	private Category category;
+    public Item(String name, Category category, int price, int quantity) {
+        this.name = name;
+        this.category = category;
+        this.price = price;
+        this.quantity = quantity;
+    }
 
-	private int price;
+    public Item() {
+    }
 
-	private int quantity;
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	private boolean secondhand;
+    public String getName() {
+        return name;
+    }
 
-	private boolean polish;
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 
-	public Item(String name, Category category, int price, int quantity) {
-		this.name = name;
-		this.category = category;
-		this.price = price;
-		this.quantity = quantity;
-	}
+    public Category getCategory() {
+        return category;
+    }
 
-	public Item() {
-	}
+    public int getPrice() {
+        return price;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public int getQuantity() {
+        return quantity;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public void setSecondhand(boolean secondhand) {
+        this.secondhand = secondhand;
+    }
 
-	public void setCategory(Category category) {
-		this.category = category;
-	}
+    public boolean isSecondhand() {
+        return secondhand;
+    }
 
-	public Category getCategory() {
-		return category;
-	}
+    public void setPolish(boolean polish) {
+        this.polish = polish;
+    }
 
-	public int getPrice() {
-		return price;
-	}
+    public boolean isPolish() {
+        return polish;
+    }
 
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public void setSecondhand(boolean secondhand) {
-		this.secondhand = secondhand;
-	}
-
-	public boolean isSecondhand() {
-		return secondhand;
-	}
-
-	public void setPolish(boolean polish) {
-		this.polish = polish;
-	}
-
-	public boolean isPolish() {
-		return polish;
-	}
-
-	@Override
-	public String toString() {
-		return getName();
-	}
+    @Override
+    public String toString() {
+        return getName();
+    }
 }

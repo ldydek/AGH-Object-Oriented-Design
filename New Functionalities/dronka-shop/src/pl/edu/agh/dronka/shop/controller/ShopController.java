@@ -10,81 +10,77 @@ import pl.edu.agh.dronka.shop.view.ShopFrame;
 
 public class ShopController {
 
-	private ShopFrame shopView;
+    private ShopFrame shopView;
+    private Shop shopModel;
+    private Category currentCategory;
+    private User currentUser;
 
-	private Shop shopModel;
+    public void logIn(User user) {
+        for (User shopUser : shopModel.getUsers()) {
+            if (shopUser.getName().equals(user.getName())
+                    && shopUser.getSurname().equals(user.getSurname())) {
+                setCurrentUser(shopUser);
+            }
+        }
+    }
 
-	private Category currentCategory;
+    public void setCurrentUser(User user) {
+        currentUser = user;
+        shopView.getCartPanel().setUser(user);
+    }
 
-	private User currentUser;
+    public void setCurrentCategory(Category currentCategory) {
+        this.currentCategory = currentCategory;
+    }
 
-	public void logIn(User user) {
-		for (User shopUser : shopModel.getUsers()) {
-			if (shopUser.getName().equals(user.getName())
-					&& shopUser.getSurname().equals(user.getSurname())) {
-				setCurrentUser(shopUser);
-			}
-		}
-	}
+    public Category getCurrentCategory() {
+        return currentCategory;
+    }
 
-	public void setCurrentUser(User user) {
-		currentUser = user;
-		shopView.getCartPanel().setUser(user);
-	}
+    public void setShopView(ShopFrame shopFrame) {
+        this.shopView = shopFrame;
+    }
 
-	public void setCurrentCategory(Category currentCategory) {
-		this.currentCategory = currentCategory;
-	}
+    public Shop getModel() {
+        return shopModel;
+    }
 
-	public Category getCurrentCategory() {
-		return currentCategory;
-	}
+    public void setModel(Shop shopModel) {
+        this.shopModel = shopModel;
+    }
 
-	public void setShopView(ShopFrame shopFrame) {
-		this.shopView = shopFrame;
-	}
+    public void chooseItem(Item item) {
+        shopView.displayItem(item);
+    }
 
-	public Shop getModel() {
-		return shopModel;
-	}
+    public void addToCart(Item item) {
+        currentUser.getCart().addItem(item);
+        shopView.getCartPanel().refresh();
+    }
 
-	public void setModel(Shop shopModel) {
-		this.shopModel = shopModel;
-	}
+    public void goToIndex() {
+        shopView.displayIndex();
+    }
 
-	public void chooseItem(Item item) {
-		shopView.displayItem(item);
-	}
+    public void showItems(Category category) {
+        setCurrentCategory(category);
+        shopView.displayItems(category);
+        refreshItemsView();
+    }
 
-	public void addToCart(Item item) {
-		currentUser.getCart().addItem(item);
-		shopView.getCartPanel().refresh();
-	}
+    public void showCategories() {
+        shopView.displayCategories();
+    }
 
-	public void goToIndex() {
-		shopView.displayIndex();
-	}
+    public void refreshItemsView() {
+        shopView.getItemsPanel().setItems(
+                shopModel.getItemsIndex().getItems(getCurrentCategory()));
+        shopView.getItemsPanel().getPropertiesPanel().fillProperties();
+    }
 
-	public void showItems(Category category) {
-		setCurrentCategory(category);
-		shopView.displayItems(category);
-		refreshItemsView();
-	}
+    public void filterItems(ItemFilter filter) {
+        Index itemsIndex = shopModel.getItemsIndex();
+        shopView.getItemsPanel().setItems(itemsIndex.getItems(filter));
 
-	public void showCategories() {
-		shopView.displayCategories();
-	}
-
-	public void refreshItemsView() {
-		shopView.getItemsPanel().setItems(
-				shopModel.getItemsIndex().getItems(getCurrentCategory()));
-		shopView.getItemsPanel().getPropertiesPanel().fillProperties();
-	}
-
-	public void filterItems(ItemFilter filter) {
-		Index itemsIndex = shopModel.getItemsIndex();
-		shopView.getItemsPanel().setItems(itemsIndex.getItems(filter));
-
-	}
-
+    }
 }

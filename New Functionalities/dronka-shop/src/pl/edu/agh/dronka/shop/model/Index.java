@@ -8,9 +8,9 @@ import pl.edu.agh.dronka.shop.model.filter.ItemFilter;
 
 public class Index {
 
-	private List<Item> items = new ArrayList<>();
+	private final List<Item> items = new ArrayList<>();
 
-	private List<Category> categories = new LinkedList<>();
+	private final List<Category> categories = new LinkedList<>();
 
 	public void addItem(Item item) {
 		items.add(item);

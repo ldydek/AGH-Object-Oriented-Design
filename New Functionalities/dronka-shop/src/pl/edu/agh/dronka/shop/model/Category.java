@@ -4,13 +4,13 @@ public enum Category {
 
 	BOOKS("Książki"), ELECTRONICS("Elektronika"), FOOD("Żywność"), MUSIC("Muzyka"), SPORT("Sport");
 
-	private String displayName;
+	private final String displayName;
 
 	public String getDisplayName() {
 		return displayName;
 	}
 
-	private Category(String displayName) {
+	Category(String displayName) {
 		this.displayName = displayName;
 	}
 }
