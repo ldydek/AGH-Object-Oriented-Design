@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import pl.edu.agh.dronka.shop.model.filter.ItemFilter;
+import pl.edu.agh.dronka.shop.model.items.Item;
 
 public class Index {
 

@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 
 import pl.edu.agh.dronka.shop.controller.ShopController;
 import pl.edu.agh.dronka.shop.model.Category;
-import pl.edu.agh.dronka.shop.model.Item;
+import pl.edu.agh.dronka.shop.model.items.Item;
 
 public class ShopFrame extends JFrame {
 
@@ -40,7 +40,7 @@ public class ShopFrame extends JFrame {
 
 	private ItemDetailsPanel itemDetailsPanel;
 
-	private ShopController shopController;
+	private final ShopController shopController;
 
 	private CartPanel cartPanel;
 
@@ -110,13 +110,7 @@ public class ShopFrame extends JFrame {
 		
 		cartPanel.add(cartButtonPanel, BorderLayout.LINE_END);
 
-		cartButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				displayPanel(CART_PANEL);
-			}
-		});
+		cartButton.addActionListener(arg0 -> displayPanel(CART_PANEL));
 
 		return cartPanel;
 

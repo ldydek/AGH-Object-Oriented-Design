@@ -12,14 +12,14 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 
 import pl.edu.agh.dronka.shop.controller.ShopController;
-import pl.edu.agh.dronka.shop.model.Item;
+import pl.edu.agh.dronka.shop.model.items.Item;
 
 public class ItemsPanel extends JPanel {
 
 	private static final long serialVersionUID = -4871875393346906351L;
 
 	private JList<Item> itemsList;
-	private ShopController shopController;
+	private final ShopController shopController;
 
 	private PropertiesPanel propertiesPanel;
 
@@ -66,13 +66,7 @@ public class ItemsPanel extends JPanel {
 
 		buttonsPanel.add(backButton);
 
-		backButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				shopController.showCategories();
-			}
-		});
+		backButton.addActionListener(arg0 -> shopController.showCategories());
 
 		return buttonsPanel;
 	}

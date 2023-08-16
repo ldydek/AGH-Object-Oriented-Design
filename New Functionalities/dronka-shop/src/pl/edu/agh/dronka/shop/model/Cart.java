@@ -1,5 +1,7 @@
 package pl.edu.agh.dronka.shop.model;
 
+import pl.edu.agh.dronka.shop.model.items.Item;
+
 import java.util.ArrayList;
 import java.util.List;
 

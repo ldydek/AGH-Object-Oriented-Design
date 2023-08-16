@@ -1,4 +1,6 @@
-package pl.edu.agh.dronka.shop.model;
+package pl.edu.agh.dronka.shop.model.items;
+
+import pl.edu.agh.dronka.shop.model.Category;
 
 public class Item {
 

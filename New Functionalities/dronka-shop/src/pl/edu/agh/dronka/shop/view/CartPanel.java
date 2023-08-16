@@ -14,18 +14,18 @@ import javax.swing.table.AbstractTableModel;
 
 import pl.edu.agh.dronka.shop.controller.ShopController;
 import pl.edu.agh.dronka.shop.model.Cart;
-import pl.edu.agh.dronka.shop.model.Item;
+import pl.edu.agh.dronka.shop.model.items.Item;
 import pl.edu.agh.dronka.shop.model.User;
 
 public class CartPanel extends JPanel {
 
 	private static final long serialVersionUID = 1619310843639460294L;
 
-	private ShopController shopController;
+	private final ShopController shopController;
 	private JLabel summaryValueLabel;
 	private JTable cartTable;
 
-	private List<Item> cartItems = new ArrayList<>();
+	private final List<Item> cartItems = new ArrayList<>();
 
 	private CartTableModel cartTableModel;
 
@@ -79,21 +79,11 @@ public class CartPanel extends JPanel {
 		buttonsPanel.add(backButton);
 		buttonsPanel.add(buyButton);
 
-		backButton.addActionListener(new ActionListener() {
+		backButton.addActionListener(arg0 -> shopController.showCategories());
 
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				shopController.showCategories();
-			}
-		});
-
-		buyButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				cartModel.clearCart();
-				refresh();
-			}
+		buyButton.addActionListener(e -> {
+			cartModel.clearCart();
+			refresh();
 		});
 
 		return buttonsPanel;
@@ -121,16 +111,15 @@ public class CartPanel extends JPanel {
 
 	private JTable createItemsCartPanel() {
 		cartTableModel = new CartTableModel(cartItems);
-		JTable table = new JTable(cartTableModel);
-		return table;
+		return new JTable(cartTableModel);
 	}
 	
 
-	private class CartTableModel extends AbstractTableModel {
+	private static class CartTableModel extends AbstractTableModel {
 
 		private static final long serialVersionUID = -3876832621582015355L;
 
-		private List<Item> cartItems;
+		private final List<Item> cartItems;
 
 		public CartTableModel(List<Item> cartItems) {
 			this.cartItems = cartItems;

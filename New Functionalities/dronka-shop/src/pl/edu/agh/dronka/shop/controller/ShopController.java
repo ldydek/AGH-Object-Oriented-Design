@@ -2,7 +2,7 @@ package pl.edu.agh.dronka.shop.controller;
 
 import pl.edu.agh.dronka.shop.model.Category;
 import pl.edu.agh.dronka.shop.model.Index;
-import pl.edu.agh.dronka.shop.model.Item;
+import pl.edu.agh.dronka.shop.model.items.Item;
 import pl.edu.agh.dronka.shop.model.Shop;
 import pl.edu.agh.dronka.shop.model.User;
 import pl.edu.agh.dronka.shop.model.filter.ItemFilter;

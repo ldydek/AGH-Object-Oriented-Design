@@ -1,14 +1,17 @@
 package pl.edu.agh.dronka.shop.model.provider;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import pl.edu.agh.dronka.shop.model.Category;
 import pl.edu.agh.dronka.shop.model.Index;
-import pl.edu.agh.dronka.shop.model.Item;
 import pl.edu.agh.dronka.shop.model.Shop;
 import pl.edu.agh.dronka.shop.model.User;
+import pl.edu.agh.dronka.shop.model.items.*;
+
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class ShopProvider {
 
@@ -78,7 +81,25 @@ public class ShopProvider {
                         dataLine, "Tanie bo polskie"));
                 boolean isSecondhand = Boolean.parseBoolean(reader.getValue(
                         dataLine, "Używany"));
-                Item item = new Item(name, category, price, quantity);
+                Item item;
+                switch (category) {
+                    case BOOKS -> item = new Book(name, category, price, quantity, Integer.parseInt(reader.getValue(dataLine, "Liczba stron")),
+                            Boolean.parseBoolean(reader.getValue(dataLine, "Twarda oprawa")));
+                    case ELECTRONICS -> item = new Device(name, category, price, quantity,
+                            Boolean.parseBoolean(reader.getValue(dataLine, "Mobilny")),
+                            Boolean.parseBoolean(reader.getValue(dataLine, "Gwarancja")));
+                    case FOOD -> {
+                        String dateString = reader.getValue(dataLine, "Data przydatności");
+                        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                        Date date = formatter.parse(dateString);
+                        item = new Food(name, category, price, quantity, date);
+                    }
+                    case MUSIC -> item = new Music(name, category, price, quantity,
+                            MusicGenre.valueOf(reader.getValue(dataLine, "Gatunek muzyczny")),
+                            Boolean.parseBoolean(reader.getValue(dataLine, "Czy ma wideo")));
+                    case SPORT -> item = new Sport(name, category, price, quantity);
+                    default -> throw new IllegalArgumentException("Error parsing data from csv");
+                }
                 item.setPolish(isPolish);
                 item.setSecondhand(isSecondhand);
 
@@ -86,7 +107,7 @@ public class ShopProvider {
 
             }
 
-        } catch (IOException e) {
+        } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
 

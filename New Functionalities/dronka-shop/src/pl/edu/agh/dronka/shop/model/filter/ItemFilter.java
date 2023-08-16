@@ -1,6 +1,6 @@
 package pl.edu.agh.dronka.shop.model.filter;
 
-import pl.edu.agh.dronka.shop.model.Item;
+import pl.edu.agh.dronka.shop.model.items.Item;
 
 public class ItemFilter {
 

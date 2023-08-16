@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import pl.edu.agh.dronka.shop.controller.ShopController;
-import pl.edu.agh.dronka.shop.model.Item;
+import pl.edu.agh.dronka.shop.model.items.Item;
 import pl.edu.agh.dronka.shop.model.util.PropertiesHelper;
 
 public class ItemDetailsPanel extends JPanel {
@@ -20,7 +20,7 @@ public class ItemDetailsPanel extends JPanel {
 	private static final long serialVersionUID = 7620300297634323349L;
 
 	private JPanel infoPanel;
-	private ShopController shopController;
+	private final ShopController shopController;
 
 	private Item currentItem;
 
@@ -66,21 +66,9 @@ public class ItemDetailsPanel extends JPanel {
 		buttonsPanel.add(backButton);
 		buttonsPanel.add(addToCartButton);
 
-		backButton.addActionListener(new ActionListener() {
+		backButton.addActionListener(arg0 -> shopController.showItems(shopController.getCurrentCategory()));
 
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				shopController.showItems(shopController.getCurrentCategory());
-			}
-		});
-
-		addToCartButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				shopController.addToCart(currentItem);
-			}
-		});
+		addToCartButton.addActionListener(e -> shopController.addToCart(currentItem));
 
 		return buttonsPanel;
 	}
