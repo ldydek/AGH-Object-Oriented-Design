@@ -83,8 +83,9 @@ public class ShopProvider {
                         dataLine, "Używany"));
                 Item item;
                 switch (category) {
-                    case BOOKS -> item = new Book(name, category, price, quantity, Integer.parseInt(reader.getValue(dataLine, "Liczba stron")),
-                            Boolean.parseBoolean(reader.getValue(dataLine, "Twarda oprawa")));
+                    case BOOKS ->
+                            item = new Book(name, category, price, quantity, Integer.parseInt(reader.getValue(dataLine, "Liczba stron")),
+                                    Boolean.parseBoolean(reader.getValue(dataLine, "Twarda oprawa")));
                     case ELECTRONICS -> item = new Device(name, category, price, quantity,
                             Boolean.parseBoolean(reader.getValue(dataLine, "Mobilny")),
                             Boolean.parseBoolean(reader.getValue(dataLine, "Gwarancja")));

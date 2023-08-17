@@ -1,73 +1,66 @@
 package pl.edu.agh.dronka.shop.view;
 
-import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import pl.edu.agh.dronka.shop.controller.ShopController;
+import pl.edu.agh.dronka.shop.model.items.Item;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
-import javax.swing.JButton;
-import javax.swing.JList;
-import javax.swing.JPanel;
-
-import pl.edu.agh.dronka.shop.controller.ShopController;
-import pl.edu.agh.dronka.shop.model.items.Item;
-
 public class ItemsPanel extends JPanel {
 
-	private static final long serialVersionUID = -4871875393346906351L;
+    private static final long serialVersionUID = -4871875393346906351L;
+    private JList<Item> itemsList;
+    private final ShopController shopController;
+    private PropertiesPanel propertiesPanel;
 
-	private JList<Item> itemsList;
-	private final ShopController shopController;
+    public ItemsPanel(ShopController shopController) {
+        this.shopController = shopController;
+        createVisuals();
+    }
 
-	private PropertiesPanel propertiesPanel;
+    public void setItems(List<Item> items) {
+        itemsList.setListData(items.toArray(new Item[0]));
+    }
 
-	public ItemsPanel(ShopController shopController) {
-		this.shopController = shopController;
-		createVisuals();
-	}
+    public PropertiesPanel getPropertiesPanel() {
+        return propertiesPanel;
+    }
 
-	public void setItems(List<Item> items) {
-		itemsList.setListData(items.toArray(new Item[0]));
-	}
+    private void createVisuals() {
+        setLayout(new BorderLayout());
+        itemsList = new JList<>();
 
-	public PropertiesPanel getPropertiesPanel() {
-		return propertiesPanel;
-	}
+        propertiesPanel = new PropertiesPanel(shopController);
 
-	private void createVisuals() {
-		setLayout(new BorderLayout());
-		itemsList = new JList<>();
+        JPanel buttonsPanel = createButtonsPanel();
 
-		propertiesPanel = new PropertiesPanel(shopController);
+        add(propertiesPanel, BorderLayout.LINE_START);
+        add(itemsList, BorderLayout.CENTER);
+        add(buttonsPanel, BorderLayout.PAGE_END);
 
-		JPanel buttonsPanel = createButtonsPanel();
+        itemsList.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                if (evt.getClickCount() == 2) {
+                    int index = itemsList.locationToIndex(evt.getPoint());
+                    Item itemModel = itemsList.getModel().getElementAt(index);
+                    shopController.chooseItem(itemModel);
+                }
+            }
+        });
+    }
 
-		add(propertiesPanel, BorderLayout.LINE_START);
-		add(itemsList, BorderLayout.CENTER);
-		add(buttonsPanel, BorderLayout.PAGE_END);
+    private JPanel createButtonsPanel() {
+        JPanel buttonsPanel = new JPanel();
 
-		itemsList.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent evt) {
-				if (evt.getClickCount() == 2) {
-					int index = itemsList.locationToIndex(evt.getPoint());
-					Item itemModel = itemsList.getModel().getElementAt(index);
-					shopController.chooseItem(itemModel);
-				}
-			}
-		});
-	}
+        JButton backButton = new JButton("Powrót");
 
-	private JPanel createButtonsPanel() {
-		JPanel buttonsPanel = new JPanel();
+        buttonsPanel.add(backButton);
 
-		JButton backButton = new JButton("Powrót");
+        backButton.addActionListener(arg0 -> shopController.showCategories());
 
-		buttonsPanel.add(backButton);
-
-		backButton.addActionListener(arg0 -> shopController.showCategories());
-
-		return buttonsPanel;
-	}
+        return buttonsPanel;
+    }
 }

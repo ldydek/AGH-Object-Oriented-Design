@@ -5,6 +5,7 @@ import pl.edu.agh.dronka.shop.model.items.Item;
 public class ItemFilter {
 
     private final Item itemSpec = new Item();
+
     public Item getItemSpec() {
         return itemSpec;
     }

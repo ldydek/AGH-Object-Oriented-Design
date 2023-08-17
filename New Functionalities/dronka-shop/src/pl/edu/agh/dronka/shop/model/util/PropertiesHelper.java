@@ -1,9 +1,9 @@
 package pl.edu.agh.dronka.shop.model.util;
 
+import pl.edu.agh.dronka.shop.model.items.*;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
-
-import pl.edu.agh.dronka.shop.model.items.*;
 
 public class PropertiesHelper {
 

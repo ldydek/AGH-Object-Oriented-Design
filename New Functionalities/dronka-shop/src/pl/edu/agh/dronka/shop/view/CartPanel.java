@@ -1,159 +1,145 @@
 package pl.edu.agh.dronka.shop.view;
 
-import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import pl.edu.agh.dronka.shop.controller.ShopController;
+import pl.edu.agh.dronka.shop.model.Cart;
+import pl.edu.agh.dronka.shop.model.User;
+import pl.edu.agh.dronka.shop.model.items.Item;
+
+import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.table.AbstractTableModel;
-
-import pl.edu.agh.dronka.shop.controller.ShopController;
-import pl.edu.agh.dronka.shop.model.Cart;
-import pl.edu.agh.dronka.shop.model.items.Item;
-import pl.edu.agh.dronka.shop.model.User;
-
 public class CartPanel extends JPanel {
 
-	private static final long serialVersionUID = 1619310843639460294L;
+    private static final long serialVersionUID = 1619310843639460294L;
+    private final ShopController shopController;
+    private JLabel summaryValueLabel;
+    private JTable cartTable;
+    private final List<Item> cartItems = new ArrayList<>();
+    private CartTableModel cartTableModel;
+    private JLabel userValueLabel;
+    private Cart cartModel;
 
-	private final ShopController shopController;
-	private JLabel summaryValueLabel;
-	private JTable cartTable;
+    public CartPanel(ShopController shopController) {
+        this.shopController = shopController;
+        createVisuals();
+    }
 
-	private final List<Item> cartItems = new ArrayList<>();
+    public void setUser(User user) {
+        cartModel = user.getCart();
+        userValueLabel.setText(user.getName() + " " + user.getSurname());
+    }
 
-	private CartTableModel cartTableModel;
+    public void refresh() {
+        cartItems.clear();
+        cartItems.addAll(cartModel.getItems());
+        cartTableModel.fireTableDataChanged();
+        summaryValueLabel.setText(Integer.toString(cartModel.getTotalPrice()));
+    }
 
-	private JLabel userValueLabel;
+    private void createVisuals() {
+        setLayout(new BorderLayout());
+        JPanel userPanel = createUserPanel();
+        cartTable = createItemsCartPanel();
+        JPanel buttonsPanel = createButtonsPanel();
+        JPanel summaryPanel = createSummaryPanel();
 
-	private Cart cartModel;
+        add(userPanel, BorderLayout.PAGE_START);
 
-	public CartPanel(ShopController shopController) {
-		this.shopController = shopController;
-		createVisuals();
-	}
+        JPanel itemsPanel = new JPanel();
+        itemsPanel.setLayout(new BorderLayout());
 
-	public void setUser(User user) {
-		cartModel = user.getCart();
-		userValueLabel.setText(user.getName() + " " + user.getSurname());
-	}
-	
-	public void refresh() {
-		cartItems.clear();
-		cartItems.addAll(cartModel.getItems());
-		cartTableModel.fireTableDataChanged();
-		summaryValueLabel.setText(Integer.toString(cartModel.getTotalPrice()));
-	}
+        itemsPanel.add(cartTable, BorderLayout.CENTER);
+        itemsPanel.add(summaryPanel, BorderLayout.PAGE_END);
 
+        add(itemsPanel, BorderLayout.CENTER);
+        add(buttonsPanel, BorderLayout.PAGE_END);
+    }
 
-	private void createVisuals() {
-		setLayout(new BorderLayout());
-		JPanel userPanel = createUserPanel();
-		cartTable = createItemsCartPanel();
-		JPanel buttonsPanel = createButtonsPanel();
-		JPanel summaryPanel =  createSummaryPanel();
+    private JPanel createButtonsPanel() {
+        JPanel buttonsPanel = new JPanel();
 
-		add(userPanel, BorderLayout.PAGE_START);
-		
-		JPanel itemsPanel = new JPanel();
-		itemsPanel.setLayout(new BorderLayout());
-		
-		itemsPanel.add(cartTable, BorderLayout.CENTER);
-		itemsPanel.add(summaryPanel, BorderLayout.PAGE_END);
-		
-		add(itemsPanel, BorderLayout.CENTER);
-		add(buttonsPanel, BorderLayout.PAGE_END);
-	}
+        JButton backButton = new JButton("Powrót");
+        JButton buyButton = new JButton("Kup!");
 
-	private JPanel createButtonsPanel() {
-		JPanel buttonsPanel = new JPanel();
+        buttonsPanel.add(backButton);
+        buttonsPanel.add(buyButton);
 
-		JButton backButton = new JButton("Powrót");
-		JButton buyButton = new JButton("Kup!");
+        backButton.addActionListener(arg0 -> shopController.showCategories());
 
-		buttonsPanel.add(backButton);
-		buttonsPanel.add(buyButton);
+        buyButton.addActionListener(e -> {
+            cartModel.clearCart();
+            refresh();
+        });
 
-		backButton.addActionListener(arg0 -> shopController.showCategories());
+        return buttonsPanel;
+    }
 
-		buyButton.addActionListener(e -> {
-			cartModel.clearCart();
-			refresh();
-		});
+    private JPanel createUserPanel() {
+        JPanel userPanel = new JPanel();
+        JLabel userLabel = new JLabel("Użytkownik:");
+        userValueLabel = new JLabel();
 
-		return buttonsPanel;
-	}
+        userPanel.add(userLabel);
+        userPanel.add(userValueLabel);
+        return userPanel;
+    }
 
-	private JPanel createUserPanel() {
-		JPanel userPanel = new JPanel();
-		JLabel userLabel = new JLabel("Użytkownik:");
-		userValueLabel = new JLabel();
+    private JPanel createSummaryPanel() {
+        JPanel summaryPanel = new JPanel();
+        JLabel summaryLabel = new JLabel("Łączna kwota:");
+        summaryValueLabel = new JLabel();
 
-		userPanel.add(userLabel);
-		userPanel.add(userValueLabel);
-		return userPanel;
-	}
-	
-	private JPanel createSummaryPanel() {
-		JPanel summaryPanel = new JPanel();
-		JLabel summaryLabel = new JLabel("Łączna kwota:");
-		summaryValueLabel = new JLabel();
+        summaryPanel.add(summaryLabel);
+        summaryPanel.add(summaryValueLabel);
+        return summaryPanel;
+    }
 
-		summaryPanel.add(summaryLabel);
-		summaryPanel.add(summaryValueLabel);
-		return summaryPanel;
-	}
+    private JTable createItemsCartPanel() {
+        cartTableModel = new CartTableModel(cartItems);
+        return new JTable(cartTableModel);
+    }
 
-	private JTable createItemsCartPanel() {
-		cartTableModel = new CartTableModel(cartItems);
-		return new JTable(cartTableModel);
-	}
-	
+    private static class CartTableModel extends AbstractTableModel {
 
-	private static class CartTableModel extends AbstractTableModel {
+        private static final long serialVersionUID = -3876832621582015355L;
 
-		private static final long serialVersionUID = -3876832621582015355L;
+        private final List<Item> cartItems;
 
-		private final List<Item> cartItems;
+        public CartTableModel(List<Item> cartItems) {
+            this.cartItems = cartItems;
+        }
 
-		public CartTableModel(List<Item> cartItems) {
-			this.cartItems = cartItems;
-		}
+        @Override
+        public String getColumnName(int column) {
+            if (column == 0) {
+                return "Produkt";
+            }
+            return "Cena";
 
-		@Override
-		public String getColumnName(int column) {
-			if (column == 0) {
-				return "Produkt";
-			}
-			return "Cena";
+        }
 
-		}
+        @Override
+        public int getColumnCount() {
+            return 2;
+        }
 
-		@Override
-		public int getColumnCount() {
-			return 2;
-		}
+        @Override
+        public int getRowCount() {
+            return cartItems.size();
+        }
 
-		@Override
-		public int getRowCount() {
-			return cartItems.size();
-		}
+        @Override
+        public Object getValueAt(int rowIndex, int columnIndex) {
+            if (columnIndex == 0) {
+                return cartItems.get(rowIndex).getName();
+            } else {
+                return cartItems.get(rowIndex).getPrice();
+            }
+        }
 
-		@Override
-		public Object getValueAt(int rowIndex, int columnIndex) {
-			if (columnIndex == 0) {
-				return cartItems.get(rowIndex).getName();
-			} else {
-				return cartItems.get(rowIndex).getPrice();
-			}
-		}
+    }
 
-	}
-
-	
 }

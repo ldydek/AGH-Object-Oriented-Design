@@ -1,90 +1,80 @@
 package pl.edu.agh.dronka.shop.view;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Map;
-
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
 import pl.edu.agh.dronka.shop.controller.ShopController;
 import pl.edu.agh.dronka.shop.model.items.Item;
 import pl.edu.agh.dronka.shop.model.util.PropertiesHelper;
 
+import javax.swing.*;
+import java.awt.*;
+import java.util.Map;
+
 public class ItemDetailsPanel extends JPanel {
 
-	private static final long serialVersionUID = 7620300297634323349L;
+    private static final long serialVersionUID = 7620300297634323349L;
+    private JPanel infoPanel;
+    private final ShopController shopController;
+    private Item currentItem;
+    private JButton addToCartButton;
 
-	private JPanel infoPanel;
-	private final ShopController shopController;
+    public ItemDetailsPanel(ShopController shopController) {
+        this.shopController = shopController;
+        createVisuals();
+    }
 
-	private Item currentItem;
+    public void setItem(Item item) {
+        infoPanel.removeAll();
+        this.currentItem = item;
 
-	private JButton addToCartButton;
+        Map<String, Object> propertiesMap = PropertiesHelper
+                .getPropertiesMap(item);
 
-	public ItemDetailsPanel(ShopController shopController) {
-		this.shopController = shopController;
-		createVisuals();
-	}
+        for (String displayName : propertiesMap.keySet()) {
+            createInfoLabel(displayName, propertiesMap.get(displayName)
+                    .toString());
+        }
 
-	public void setItem(Item item) {
-		infoPanel.removeAll();
-		this.currentItem = item;
+        addToCartButton.setEnabled(item.getQuantity() > 0);
+    }
 
-		Map<String, Object> propertiesMap = PropertiesHelper
-				.getPropertiesMap(item);
+    private void createVisuals() {
+        setLayout(new BorderLayout());
 
-		for (String displayName : propertiesMap.keySet()) {
-			createInfoLabel(displayName, propertiesMap.get(displayName)
-					.toString());
-		}
+        JPanel outerInfoPanel = new JPanel();
+        infoPanel = createInfoPanel();
+        outerInfoPanel.add(infoPanel);
 
-		addToCartButton.setEnabled(item.getQuantity() > 0);
-	}
+        add(outerInfoPanel, BorderLayout.LINE_START);
+        add(createButtonsPanel(), BorderLayout.PAGE_END);
+    }
 
-	private void createVisuals() {
-		setLayout(new BorderLayout());
+    private Component createButtonsPanel() {
+        JPanel buttonsPanel = new JPanel();
 
-		JPanel outerInfoPanel = new JPanel();
-		infoPanel = createInfoPanel();
-		outerInfoPanel.add(infoPanel);
+        JButton backButton = new JButton("Powrót");
+        addToCartButton = new JButton("Dodaj do koszyka");
 
-		add(outerInfoPanel, BorderLayout.LINE_START);
-		add(createButtonsPanel(), BorderLayout.PAGE_END);
-	}
+        buttonsPanel.add(backButton);
+        buttonsPanel.add(addToCartButton);
 
-	private Component createButtonsPanel() {
-		JPanel buttonsPanel = new JPanel();
+        backButton.addActionListener(arg0 -> shopController.showItems(shopController.getCurrentCategory()));
 
-		JButton backButton = new JButton("Powrót");
-		addToCartButton = new JButton("Dodaj do koszyka");
+        addToCartButton.addActionListener(e -> shopController.addToCart(currentItem));
 
-		buttonsPanel.add(backButton);
-		buttonsPanel.add(addToCartButton);
+        return buttonsPanel;
+    }
 
-		backButton.addActionListener(arg0 -> shopController.showItems(shopController.getCurrentCategory()));
+    private JPanel createInfoPanel() {
+        JPanel infoPanel = new JPanel();
+        infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
 
-		addToCartButton.addActionListener(e -> shopController.addToCart(currentItem));
+        return infoPanel;
+    }
 
-		return buttonsPanel;
-	}
+    private void createInfoLabel(String name, String value) {
+        JPanel infoLabelPanel = new JPanel(new BorderLayout(10, 2));
+        infoLabelPanel.add(new JLabel(name + ":"), BorderLayout.LINE_START);
+        infoLabelPanel.add(new JLabel(value), BorderLayout.CENTER);
 
-	private JPanel createInfoPanel() {
-		JPanel infoPanel = new JPanel();
-		infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
-
-		return infoPanel;
-	}
-
-	private void createInfoLabel(String name, String value) {
-		JPanel infoLabelPanel = new JPanel(new BorderLayout(10, 2));
-		infoLabelPanel.add(new JLabel(name + ":"), BorderLayout.LINE_START);
-		infoLabelPanel.add(new JLabel(value), BorderLayout.CENTER);
-
-		infoPanel.add(infoLabelPanel);
-	}
+        infoPanel.add(infoLabelPanel);
+    }
 }
