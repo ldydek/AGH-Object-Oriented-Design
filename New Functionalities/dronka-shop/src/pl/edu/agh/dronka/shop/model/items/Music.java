@@ -5,7 +5,7 @@ import pl.edu.agh.dronka.shop.model.Category;
 public class Music extends Item {
 
     private final MusicGenre musicGenre;
-    private final boolean hasVideo;
+    private boolean hasVideo;
 
     public Music(String name, Category category, int price, int quantity, MusicGenre musicGenre, boolean hasVideo) {
         super(name, category, price, quantity);
@@ -19,5 +19,9 @@ public class Music extends Item {
 
     public boolean isHasVideo() {
         return hasVideo;
+    }
+
+    public void setVideo(boolean hasVideo) {
+        this.hasVideo = hasVideo;
     }
 }

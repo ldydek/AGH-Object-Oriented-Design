@@ -5,7 +5,7 @@ import pl.edu.agh.dronka.shop.model.Category;
 public class Book extends Item {
 
     private final int pageNumber;
-    private final boolean hardCover;
+    private boolean hardCover;
 
     public Book(String name, Category category, int price, int quantity, int pageNumber, boolean hardCover) {
         super(name, category, price, quantity);
@@ -19,5 +19,9 @@ public class Book extends Item {
 
     public boolean isHardCover() {
         return hardCover;
+    }
+
+    public void setHardCover(boolean hardCover) {
+        this.hardCover = hardCover;
     }
 }

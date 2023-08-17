@@ -5,8 +5,6 @@ import pl.edu.agh.dronka.shop.model.Category;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class CategoriesPanel extends JPanel {
 
@@ -26,7 +24,6 @@ public class CategoriesPanel extends JPanel {
 
         for (Category category : shopController.getModel().getItemsIndex().getCategories()) {
             addCategoryLink(category);
-
         }
     }
 

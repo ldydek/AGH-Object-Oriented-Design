@@ -4,8 +4,8 @@ import pl.edu.agh.dronka.shop.model.Category;
 
 public class Device extends Item {
 
-    private final boolean mobile;
-    private final boolean warranty;
+    private boolean mobile;
+    private boolean warranty;
 
     public Device(String name, Category category, int price, int quantity, boolean mobile, boolean warranty) {
         super(name, category, price, quantity);
@@ -19,5 +19,13 @@ public class Device extends Item {
 
     public boolean isWarranty() {
         return warranty;
+    }
+
+    public void setMobile(boolean mobile) {
+        this.mobile = mobile;
+    }
+
+    public void setWarranty(boolean warranty) {
+        this.warranty = warranty;
     }
 }

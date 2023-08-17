@@ -57,9 +57,7 @@ public class Index {
             if (filter.appliesTo(item)) {
                 result.add(item);
             }
-
         }
-
         return result;
     }
 }
