@@ -61,9 +61,6 @@ public class ItemFilter {
                     return false;
                 }
             }
-            case FOOD, SPORT -> {
-                return false;
-            }
         }
         return true;
     }
