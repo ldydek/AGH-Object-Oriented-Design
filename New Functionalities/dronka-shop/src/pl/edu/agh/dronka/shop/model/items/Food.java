@@ -6,12 +6,14 @@ import java.util.Date;
 
 public class Food extends Item {
 
-    private final Date eatByDate;
+    private Date eatByDate;
 
     public Food(String name, Category category, int price, int quantity, Date eatByDate) {
         super(name, category, price, quantity);
         this.eatByDate = eatByDate;
     }
+
+    public Food() { }
 
     public Date getEatByDate() {
         return eatByDate;

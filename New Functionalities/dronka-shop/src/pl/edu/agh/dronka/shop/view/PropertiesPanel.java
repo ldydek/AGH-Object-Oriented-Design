@@ -14,7 +14,7 @@ public class PropertiesPanel extends JPanel {
 
     private static final long serialVersionUID = -2804446079853846996L;
     private final ShopController shopController;
-    private final ItemFilter filter = new ItemFilter();
+    private ItemFilter filter;
 
     public PropertiesPanel(ShopController shopController) {
         this.shopController = shopController;
@@ -23,6 +23,7 @@ public class PropertiesPanel extends JPanel {
 
     public void fillProperties() {
         removeAll();
+        this.filter = new ItemFilter( shopController.getCurrentCategory());
 
         filter.getItemSpec().setCategory(shopController.getCurrentCategory());
 
@@ -36,29 +37,28 @@ public class PropertiesPanel extends JPanel {
             shopController.filterItems(filter);
         }));
 
+
+        Item item = filter.getItemSpec();
+
         switch (shopController.getCurrentCategory()) {
             case BOOKS -> add(createPropertyCheckbox("Twarda okładka", event -> {
-                if (!(filter.getItemSpec() instanceof Book)) return;
-                Item item = filter.getItemSpec();
+                if (!(item instanceof Book)) return;
                 ((Book) item).setHardCover(((JCheckBox) event.getSource()).isSelected());
                 shopController.filterItems(filter);
             }));
             case ELECTRONICS -> {
                 add(createPropertyCheckbox("Mobilny", event -> {
-                    if (!(filter.getItemSpec() instanceof Device)) return;
-                    Item item = filter.getItemSpec();
+                    if (!(item instanceof Device)) return;
                     ((Device) item).setMobile(((JCheckBox) event.getSource()).isSelected());
                     shopController.filterItems(filter);
                 }));
                 add(createPropertyCheckbox("Gwarancja", event -> {
-                    Item item = filter.getItemSpec();
                     ((Device) item).setWarranty(((JCheckBox) event.getSource()).isSelected());
                     shopController.filterItems(filter);
                 }));
             }
             case MUSIC -> add(createPropertyCheckbox("Wideo", event -> {
-                if (!(filter.getItemSpec() instanceof Music)) return;
-                Item item = filter.getItemSpec();
+                if (!(item instanceof Music)) return;
                 ((Music) item).setVideo(((JCheckBox) event.getSource()).isSelected());
                 shopController.filterItems(filter);
             }));

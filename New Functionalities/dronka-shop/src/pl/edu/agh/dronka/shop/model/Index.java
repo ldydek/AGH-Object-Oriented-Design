@@ -1,7 +1,7 @@
 package pl.edu.agh.dronka.shop.model;
 
 import pl.edu.agh.dronka.shop.model.filter.ItemFilter;
-import pl.edu.agh.dronka.shop.model.items.Item;
+import pl.edu.agh.dronka.shop.model.items.*;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -46,7 +46,6 @@ public class Index {
                 categoryItems.add(item);
             }
         }
-
         return categoryItems;
     }
 

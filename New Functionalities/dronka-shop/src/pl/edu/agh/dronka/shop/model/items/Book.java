@@ -4,7 +4,7 @@ import pl.edu.agh.dronka.shop.model.Category;
 
 public class Book extends Item {
 
-    private final int pageNumber;
+    private int pageNumber;
     private boolean hardCover;
 
     public Book(String name, Category category, int price, int quantity, int pageNumber, boolean hardCover) {
@@ -12,6 +12,8 @@ public class Book extends Item {
         this.pageNumber = pageNumber;
         this.hardCover = hardCover;
     }
+
+    public Book() { }
 
     public int getPageNumber() {
         return pageNumber;

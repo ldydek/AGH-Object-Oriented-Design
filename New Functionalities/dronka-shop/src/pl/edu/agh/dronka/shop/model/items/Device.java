@@ -13,6 +13,8 @@ public class Device extends Item {
         this.warranty = warranty;
     }
 
+    public Device() { }
+
     public boolean isMobile() {
         return mobile;
     }

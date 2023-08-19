@@ -4,7 +4,7 @@ import pl.edu.agh.dronka.shop.model.Category;
 
 public class Music extends Item {
 
-    private final MusicGenre musicGenre;
+    private MusicGenre musicGenre;
     private boolean hasVideo;
 
     public Music(String name, Category category, int price, int quantity, MusicGenre musicGenre, boolean hasVideo) {
@@ -12,6 +12,8 @@ public class Music extends Item {
         this.musicGenre = musicGenre;
         this.hasVideo = hasVideo;
     }
+
+    public Music() { }
 
     public MusicGenre getGenre() {
         return musicGenre;
