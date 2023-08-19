@@ -23,7 +23,7 @@ public class PropertiesPanel extends JPanel {
 
     public void fillProperties() {
         removeAll();
-        this.filter = new ItemFilter( shopController.getCurrentCategory());
+        this.filter = new ItemFilter(shopController.getCurrentCategory());
 
         filter.getItemSpec().setCategory(shopController.getCurrentCategory());
 
@@ -36,7 +36,6 @@ public class PropertiesPanel extends JPanel {
             filter.getItemSpec().setSecondhand(((JCheckBox) event.getSource()).isSelected());
             shopController.filterItems(filter);
         }));
-
 
         Item item = filter.getItemSpec();
 

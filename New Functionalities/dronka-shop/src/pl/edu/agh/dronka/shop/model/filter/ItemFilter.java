@@ -7,7 +7,7 @@ public class ItemFilter {
 
     private final Item itemSpec;
 
-    public ItemFilter(Category category){
+    public ItemFilter(Category category) {
         switch (category) {
             case BOOKS -> itemSpec = new Book();
             case ELECTRONICS -> itemSpec = new Device();
